@@ -28,8 +28,8 @@ public class Exercice112 {
 		double nbr2;
 		boolean restartProgram;
 		//Program title
-		System.out.println("Average of 2 numbers calculating program");
-		System.out.println("========================================\n");
+		System.out.println("Average of 2 numbers calculating complex program");
+		System.out.println("================================================\n");
 		//Start
 		sc = new Scanner(System.in);
 		restartProgram = true;

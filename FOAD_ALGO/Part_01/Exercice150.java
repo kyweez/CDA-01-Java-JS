@@ -38,8 +38,8 @@ public class Exercice150 {
 		byte duration;
 
 		// Program title
-		System.out.println("Average calculating program");
-		System.out.println("========================================\n");
+		System.out.println("Interest calculator program");
+		System.out.println("===========================\n");
 
 		// ### Start ###//
 		sc = new Scanner(System.in);

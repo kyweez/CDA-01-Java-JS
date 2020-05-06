@@ -25,8 +25,8 @@ public class Exercice111 {
 		double nbr1;
 		double nbr2;
 		//Program title
-		System.out.println("Average of 2 numbers calculating program");
-		System.out.println("========================================\n");
+		System.out.println("Average of 2 numbers calculating  simple program");
+		System.out.println("================================================\n");
 		//Start
 		System.out.println("Please insert 2 numbers separated by a space:");
 		sc = new Scanner(System.in);

@@ -42,8 +42,8 @@ public class Exercice120 {
 		double radius;
 		
 		//Program title
-		System.out.println("Average calculating program");
-		System.out.println("========================================\n");
+		System.out.println("Sphere area and volume calculator");
+		System.out.println("=================================\n");
 		
 		//### Start ###//
 		sc = new Scanner(System.in);

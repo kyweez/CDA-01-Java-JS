@@ -29,8 +29,8 @@ public class Exercice113 {
 		boolean restartProgram;
 		
 		//Program title
-		System.out.println("Average calculating program");
-		System.out.println("========================================\n");
+		System.out.println("Average calculating complex program");
+		System.out.println("===================================\n");
 		
 		//### Start ###//
 		sc = new Scanner(System.in);

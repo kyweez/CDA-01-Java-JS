@@ -23,8 +23,8 @@ public class Exercice140 {
 		double temp;
 
 		// Program title
-		System.out.println("Average calculating program");
-		System.out.println("========================================\n");
+		System.out.println("Values swap program");
+		System.out.println("===================\n");
 
 		// ### Start ###//
 		sc = new Scanner(System.in);

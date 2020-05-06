@@ -36,8 +36,8 @@ public class Exercice130 {
 		boolean validAngle;
 
 		// Program title
-		System.out.println("Average calculating program");
-		System.out.println("========================================\n");
+		System.out.println("Circular sector area calculator");
+		System.out.println("===============================\n");
 
 		// ### Start ###//
 		sc = new Scanner(System.in);
