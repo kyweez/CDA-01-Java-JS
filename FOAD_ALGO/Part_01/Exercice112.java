@@ -4,18 +4,22 @@ import java.util.Scanner;
  * User has to input 2 integers.
  * The program calculates the average of the 2 numbers and display the result as a double number.
  * After each calculation, the user is invited to perform another calculation or exit the program.
+ * 
+ * WARNING !!!
+ * This exercise do not check the user input error cases.
+ * We assume that the user will put valid values separated by spaces.
+ * Also, we don't cover the max/min values.
  */
 
 /**
  * @author Kyweez
- * This exercise do not check the user input error cases.
- * We assume that the user will put valid values separated by spaces.
- * Also, we don't cover the max/min values.
+
  */
 public class Exercice112 {
 
 	/**
 	 * @param args
+	 * 
 	 */
 	public static void main(String[] args) {
 		//Variables declaration
