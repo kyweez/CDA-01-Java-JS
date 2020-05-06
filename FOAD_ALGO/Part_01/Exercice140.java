@@ -34,7 +34,7 @@ public class Exercice140 {
 		System.out.println("Please enter a number b :");
 		b = sc.nextDouble();
 		System.out.println("b = " + b);
-		System.out.println("Execution of the algorithm...");
+		System.out.println("\nExecution of the algorithm...");
 		temp = a;
 		a = b;
 		b = temp;
