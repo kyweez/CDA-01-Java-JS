@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 /**
  * @author Kyweez
+ * This exercise do not check the user input error cases.
+ * We assume that the user will put valid values separated by spaces.
+ * Also, we don't cover the max/min values.
  */
 public class Exercice112 {
 
