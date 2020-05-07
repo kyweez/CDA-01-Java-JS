@@ -18,12 +18,12 @@ public class Exercice160 {
 	public static boolean isPrime(int number) {
 		//Negative numbers are not prime. 0 and 1 too.
 		if (number < 2)
-			return false;
+			return (false);
 		//This algorithm is fine but a range of the loop is useless actually
 		//Optimized version in v1.6.1
 		for (int i = 2; i < number; i++) {
 			if (number % i == 0)
-				return false;
+				return (false);
 		}
 		return (true);
 	}
