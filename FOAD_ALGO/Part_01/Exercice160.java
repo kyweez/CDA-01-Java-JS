@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 /**
  * Read a number and find if it's a prime number.
+ * A prime number (or a prime) is a natural number greater than 1 that is not a product of two smaller natural numbers.
  * 
  * WARNING !!!
  * This exercise do not check the user input error cases.
@@ -15,8 +16,11 @@ import java.util.Scanner;
 public class Exercice160 {
 
 	public static boolean isPrime(int number) {
-		if (number < 0)
+		//Negative numbers are not prime. 0 and 1 too.
+		if (number < 2)
 			return false;
+		//This algorithm is fine but a range of the loop is useless actually
+		//Optimized version in v1.6.1
 		for (int i = 2; i < number; i++) {
 			if (number % i == 0)
 				return false;
@@ -32,7 +36,7 @@ public class Exercice160 {
 
 		// Program title
 		System.out.println("Is prime program (non optimized algo)");
-		System.out.println("================\n");
+		System.out.println("=====================================\n");
 
 		// ### Start ###//
 		sc = new Scanner(System.in);
