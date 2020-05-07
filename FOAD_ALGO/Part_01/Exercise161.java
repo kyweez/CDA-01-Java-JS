@@ -13,17 +13,27 @@ import java.util.Scanner;
 /**
  * @author Kyweez
  */
-public class Exercice160 {
+public class Exercise161 {
 
 	public static boolean isPrime(int number) {
-		//Negative numbers are not prime. 0 and 1 too.
-		if (number < 2)
+		//	Negative numbers are not prime. 0 and 1 too.
+		//	Even numbers are not prime
+		if (number < 2 || (number != 2 && number % 2 == 0))
 			return (false);
-		//This algorithm is fine but a range of the loop is useless actually
-		//Optimized version in v1.6.1
-		for (int i = 2; i < number; i++) {
+		//**Optimized version**//
+		//	Given N, A and B : 3 integers 
+		//	if N = A.B
+		//	then A <= sqrt(N) or B <= sqrt(N)
+		//	Assume A >= B, we can write the followings
+		//	A <= sqrt(N)
+		//	A^2 <= N
+		//	A*A <= N
+		//	A <= N/A
+		//	We can look for every iteration of A from 0 to sqrt(N)
+		for (int i = 3; i <= number/i ; i++) {
 			if (number % i == 0)
 				return (false);
+			i++;
 		}
 		return (true);
 	}
@@ -35,8 +45,8 @@ public class Exercice160 {
 		int number;
 
 		// Program title
-		System.out.println("Is prime program (non optimized algo)");
-		System.out.println("=====================================\n");
+		System.out.println("Is prime program (optimized algo)");
+		System.out.println("=================================\n");
 
 		// ### Start ###//
 		sc = new Scanner(System.in);
