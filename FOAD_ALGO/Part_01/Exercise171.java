@@ -15,12 +15,21 @@ import java.util.Scanner;
 public class Exercise171 {
 	
 	//Simple algorithm
-	public static void sortInteger(int[] table) {
-		int buffer;
+	public static void sortInteger(int[] tab) {
+		boolean sortedTab = (false);
 		int i = 0;
 		int j = i + 1;
-		while (i < table.length) {
-			
+		int	temp = 0;
+		
+		while (!sortedTab) {
+			sortedTab = true;
+			while (i < (tab.length - 1)) {
+				if (tab[i] > tab[j]) {
+					temp = tab[i];
+					tab[i] = tab[j];
+					tab[j] = temp;
+				}
+			}
 		}
 	}
 	
