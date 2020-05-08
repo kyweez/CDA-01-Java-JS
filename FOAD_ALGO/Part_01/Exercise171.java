@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * Read 3 numbers a, b and c. Write them in ascending order.
+ * Read as many numbers as you want (separated by a space).
  * 
  * WARNING !!!
  * This exercise do not check the user input error cases.
@@ -26,12 +26,14 @@ public class Exercise171 {
 			sortedTab = true;
 			i = 0;
 			j = 1;
+			//Push the highest value to her good place
 			while (j < bound) {
+				//Swap value each time tab[i] > tab[j]
 				if (tab[i] > tab[j]) {
 					temp = tab[i];
 					tab[i] = tab[j];
 					tab[j] = temp;
-					sortedTab = false;
+					sortedTab = false; //Deny the end of the sort by telling it's not sorted
 				}
 				i++;
 				j++;
@@ -48,8 +50,8 @@ public class Exercise171 {
 		int[] numberTab;
 
 		// Program title
-		System.out.println("Sorting program (bubble algo)");
-		System.out.println("============================\n");
+		System.out.println("Sorting program (simple bubble algo)");
+		System.out.println("===================================\n");
 
 		// ### Start ###//
 		sc = new Scanner(System.in);
