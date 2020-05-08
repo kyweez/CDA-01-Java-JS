@@ -14,22 +14,29 @@ import java.util.Scanner;
  */
 public class Exercise171 {
 	
-	//Simple algorithm
+	//Simple bubble sort algorithm
 	public static void sortInteger(int[] tab) {
 		boolean sortedTab = (false);
-		int i = 0;
-		int j = i + 1;
+		int i;
+		int j;
+		int bound = tab.length;
 		int	temp = 0;
 		
 		while (!sortedTab) {
 			sortedTab = true;
-			while (i < (tab.length - 1)) {
+			i = 0;
+			j = 1;
+			while (j < bound) {
 				if (tab[i] > tab[j]) {
 					temp = tab[i];
 					tab[i] = tab[j];
 					tab[j] = temp;
+					sortedTab = false;
 				}
+				i++;
+				j++;
 			}
+			bound--; //The biggest bound has been set, no need to browse all the table 
 		}
 	}
 	
@@ -56,8 +63,9 @@ public class Exercise171 {
 		for (int i = 0; i < numberTab.length; i++) {
 			numberTab[i] = Integer.parseInt(inputTab[i]);
 		}
+		sortInteger(numberTab);
 		for (int i : numberTab) {
-			System.out.println(i);
+			System.out.print(i+" ");
 		}
 		sc.close();
 	}
