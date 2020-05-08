@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 /**
  * Read 2 numbers a and b. Write them in ascending order.
- * Read 3 numbers a, b and c. Write them in ascending order.
  * 
  * WARNING !!!
  * This exercise do not check the user input error cases.
