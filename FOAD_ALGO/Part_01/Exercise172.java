@@ -14,53 +14,47 @@ import java.util.Scanner;
  */
 public class Exercise172 {
 	
-	//Optimized bubble sort algorithm
+	//Shaker sort algorithm
 	public static void sortInteger(int[] tab) {
 		boolean sortedTab = (false);
 		int i;
 		int j;
 		int minBound = 0;
-		int maxBound = tab.length;
+		int maxBound = tab.length - 1;
 		int	temp = 0;
 		
 		while (!sortedTab) {
-			sortedTab = true;
+			sortedTab = (true);
 			i = minBound;
 			j = i + 1;
 			//Push the highest value to her good place
-			while (j < maxBound) {
+			while (j <= maxBound) {
 				//Swap value each time tab[i] > tab[j]
 				if (tab[i] > tab[j]) {
 					temp = tab[i];
 					tab[i] = tab[j];
 					tab[j] = temp;
-					sortedTab = false; //Deny the end of the sort by telling it's not sorted
+					sortedTab = (false); //Deny the end of the sort by telling it's not sorted
 				}
 				i++;
 				j++;
-				System.out.println("TAB : ");
-				for (int k : tab) {
-					System.out.print(k+" ");
-				}
-				System.out.println("\n");
 			}
 			maxBound--; //The biggest maxBound has been set, no need to browse all the table
 			if (!sortedTab) {
+				sortedTab = (true);
 				j = maxBound;
 				i = j -1;
-				while (j > minBound) {
+				while (i >= minBound) {
 					if (tab[i] > tab[j]) {
 						temp = tab[i];
 						tab[i] = tab[j];
 						tab[j] = temp;
-						sortedTab = false; //Deny the end of the sort by telling it's not sorted
+						sortedTab = (false); //Deny the end of the sort by telling it's not sorted
 					}
-					else
-						sortedTab = true;
 					i--;
 					j--;
 				}
-				minBound++; //The biggest maxBound has been set, no need to browse all the table
+				minBound++; //The lowest minBound has been set, no need to browse all the table
 			}
 		}
 	}
@@ -73,8 +67,8 @@ public class Exercise172 {
 		int[] numberTab;
 
 		// Program title
-		System.out.println("Sorting program (optimized bubble algo)");
-		System.out.println("======================================\n");
+		System.out.println("Sorting program (shaker algo)");
+		System.out.println("==============================\n");
 
 		// ### Start ###//
 		sc = new Scanner(System.in);
