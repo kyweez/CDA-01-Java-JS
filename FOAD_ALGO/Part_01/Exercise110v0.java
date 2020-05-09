@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * @author Kyweez
  */
-public class Exercise190 {
+public class Exercise110v0 {
 	
 	public static void main(String[] args) {
 		// Variables declaration

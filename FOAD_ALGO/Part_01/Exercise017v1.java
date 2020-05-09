@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * @author Kyweez
  */
-public class Exercise171 {
+public class Exercise017v1 {
 	
 	//Simple bubble sort algorithm
 	public static void sortInteger(int[] tab) {

@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  * @author Kyweez
  */
-public class Exercise130 {
+public class Exercise013v0 {
 
 	/**
 	 * 

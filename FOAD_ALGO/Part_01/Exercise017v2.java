@@ -12,7 +12,7 @@ import java.util.Scanner;
 /**
  * @author Kyweez
  */
-public class Exercise172 {
+public class Exercise017v2 {
 	
 	//Shaker sort algorithm
 	public static void sortInteger(int[] tab) {

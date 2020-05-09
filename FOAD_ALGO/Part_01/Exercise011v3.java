@@ -14,7 +14,7 @@ import java.util.Scanner;
 /**
  * @author Kyweez
  */
-public class Exercise113 {
+public class Exercise011v3 {
 
 	/**
 	 * @param args

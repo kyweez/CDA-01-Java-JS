@@ -15,7 +15,7 @@ import java.util.Scanner;
 /**
  * @author Kyweez
  */
-public class Exercise150 {
+public class Exercise015v0 {
 
 	public static double simpleInterest(double amount, double rate, byte duration) {
 		return (amount*(1 + duration * rate));

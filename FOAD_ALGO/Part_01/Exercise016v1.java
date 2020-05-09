@@ -13,7 +13,7 @@ import java.util.Scanner;
 /**
  * @author Kyweez
  */
-public class Exercise161 {
+public class Exercise016v1 {
 
 	public static boolean isPrime(int number) {
 		//	Negative numbers are not prime. 0 and 1 too.

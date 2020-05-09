@@ -15,7 +15,7 @@ import java.util.Scanner;
 /**
  * @author Kyweez
  */
-public class Exercise180 {
+public class Exercise018v0 {
 	
 	public static boolean leapYear(int year) {
 		return (year % 4 == 0 ? (year % 100 == 0 && year % 400 !=0) ? (false) : (true) : (false));

@@ -13,27 +13,36 @@ import java.util.Scanner;
 
 /**
  * @author Kyweez
+
  */
-public class Exercise111 {
+public class Exercise011v2 {
 
 	/**
 	 * @param args
+	 * 
 	 */
 	public static void main(String[] args) {
 		//Variables declaration
 		Scanner sc;
 		double nbr1;
 		double nbr2;
+		boolean restartProgram;
 		//Program title
-		System.out.println("Average of 2 numbers calculating  simple program");
+		System.out.println("Average of 2 numbers calculating complex program");
 		System.out.println("================================================\n");
 		//Start
-		System.out.println("Please insert 2 numbers separated by a space:");
 		sc = new Scanner(System.in);
-		nbr1 = Double.parseDouble(sc.next());
-		nbr2 = Double.parseDouble(sc.next());
-		//Print result
-		System.out.println("The average of " + nbr1 + " and " + nbr2 + " is : " + (nbr1 + nbr2) / 2);
+		restartProgram = true;
+		while (restartProgram) {
+			System.out.println("Please insert 2 numbers separated by a space:");
+			nbr1 = Double.parseDouble(sc.next());
+			nbr2 = Double.parseDouble(sc.next());
+			//Print result
+			System.out.println("The average of " + nbr1 + " and " + nbr2 + " is : " + (nbr1 + nbr2) / 2);
+			System.out.println("\nPress y + \"Enter\" if you want to restart the program or n + \"Enter\" if you want to leave:");
+			restartProgram = sc.next().contentEquals("y");
+			System.out.println(restartProgram ? "Restarting program...\n" : "Thanks for using this program");  
+		}
 		//Scanner closing (Do not forget)
 		sc.close();
 	}
