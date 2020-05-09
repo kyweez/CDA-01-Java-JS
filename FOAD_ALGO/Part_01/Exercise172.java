@@ -25,8 +25,8 @@ public class Exercise172 {
 		
 		while (!sortedTab) {
 			sortedTab = true;
-			i = 0;
-			j = 1;
+			i = minBound;
+			j = i + 1;
 			//Push the highest value to her good place
 			while (j < maxBound) {
 				//Swap value each time tab[i] > tab[j]
@@ -38,12 +38,17 @@ public class Exercise172 {
 				}
 				i++;
 				j++;
+				System.out.println("TAB : ");
+				for (int k : tab) {
+					System.out.print(k+" ");
+				}
+				System.out.println("\n");
 			}
 			maxBound--; //The biggest maxBound has been set, no need to browse all the table
 			if (!sortedTab) {
 				j = maxBound;
 				i = j -1;
-				while (i > minBound) {
+				while (j > minBound) {
 					if (tab[i] > tab[j]) {
 						temp = tab[i];
 						tab[i] = tab[j];
