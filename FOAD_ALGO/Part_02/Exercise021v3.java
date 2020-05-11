@@ -30,12 +30,11 @@ public class Exercise021v3 {
 		// Variables declaration
 		Scanner sc;
 		String regexPattern;
+		String regexAction;
 		String inputString;
 		ArrayList<String> stringArray;
-		boolean validInput;
 		boolean convert;
 		boolean continueProgram;
-		int i;
 
 		// Program title
 		System.out.println("Distance converter program");
@@ -44,7 +43,7 @@ public class Exercise021v3 {
 		// ### Start ###
 		// Assignments
 		regexPattern = "^([0-9]{1,10})(\\.[0-9]+)?(\\s(km|mi))?$";
-		i = 0;
+		regexAction = "^go$|^quit$";
 		convert = false;
 		continueProgram = true;
 		stringArray = new ArrayList<String>();
@@ -53,13 +52,15 @@ public class Exercise021v3 {
 			while (!convert) {
 				System.out.println("Insert a disance");
 				inputString = sc.nextLine();
-				if (inputString.equalsIgnoreCase("go")) {
-					convert = true;
-				} else if (inputString.equalsIgnoreCase("quit")) {
-					convert = true;
-					continueProgram = false;
-				} else {
+				if (regexChecker(regexPattern, inputString)) {
 					stringArray.add(inputString);
+				} 
+				else if (inputString.equalsIgnoreCase(regexAction)) {
+					convert = true;
+					continueProgram = inputString.equalsIgnoreCase("go") ? true : false;
+				} 
+				else {
+					System.out.println("Bad input");
 				}
 			}
 
