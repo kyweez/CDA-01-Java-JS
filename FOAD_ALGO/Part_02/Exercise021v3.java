@@ -28,15 +28,14 @@ public class Exercise021v3 {
 	 */
 	public static void main(String[] args) {
 		// Variables declaration
-		Scanner 			sc;
-		String				regexPattern;
-		String				inputString;
-		ArrayList<String>	stringArray;
-		boolean				validInput;
-		boolean				convert;
-		boolean				continueProgram;
+		Scanner sc;
+		String regexPattern;
+		String inputString;
+		ArrayList<String> stringArray;
+		boolean validInput;
+		boolean convert;
+		boolean continueProgram;
 		int i;
-
 
 		// Program title
 		System.out.println("Distance converter program");
@@ -47,23 +46,24 @@ public class Exercise021v3 {
 		regexPattern = "^([0-9]{1,10})(\\.[0-9]+)?(\\s(km|mi))?$";
 		i = 0;
 		convert = false;
+		continueProgram = true;
 		stringArray = new ArrayList<String>();
 		sc = new Scanner(System.in);
-		while (!convert) {
-			System.out.println("Insert a disance");
-			inputString = sc.nextLine();
-			if (inputString.equalsIgnoreCase("go")) {
-				convert = true;
+		while (continueProgram) {
+			while (!convert) {
+				System.out.println("Insert a disance");
+				inputString = sc.nextLine();
+				if (inputString.equalsIgnoreCase("go")) {
+					convert = true;
+				} else if (inputString.equalsIgnoreCase("quit")) {
+					convert = true;
+					continueProgram = false;
+				} else {
+					stringArray.add(inputString);
+				}
 			}
-			else if (inputString.equalsIgnoreCase("quit")) {
-				convert = true;
-				continueProgram = false;
-			}
-			else {
-				stringArray.add(inputString);
-			}
+
+			sc.close();
 		}
-		
-		sc.close();
 	}
 }
