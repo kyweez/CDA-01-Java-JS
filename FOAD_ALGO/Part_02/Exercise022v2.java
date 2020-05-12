@@ -16,44 +16,26 @@ import java.util.regex.*;
  * @author Kyweez
  */
 public class Exercise022v2 {
-	
-	public static void converter(String inputString) {
-		String[] tabInput;
-		double value;
-		tabInput = inputString.split(" ");
-		if (tabInput[1].equals("F")) {
-			value = Double.parseDouble(tabInput[0]);
-			value = (value - 32)*5/9;
-			tabInput[1] = "C";
-		}
-		else {
-			value = Double.parseDouble(tabInput[0]);
-			value = (value * 9/5) + 32;
-			tabInput[1] = "F";
-		}
-		System.out.println(inputString + " = " + value + " °" + tabInput[1]);
-	}
-	
-	/**
-	 * 
-	 * @param pattern
-	 * @param input
-	 * @return
-	 */
+
 	public static boolean regexChecker(String pattern, String input) {
 		Pattern regexPattern = Pattern.compile(pattern);
 		Matcher regexMatcher = regexPattern.matcher(input);
 		return (regexMatcher.find());
 	}
-	
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// Variables declaration
 		Scanner sc;
-		String regexPattern;
-		String inputString;
+		String unit;
+		String pattern;
+		String value1;
+		String value2;
+		boolean validUnit;
+		boolean validMinValue;
+		boolean validMaxValue;
 
 		// Program title
 		System.out.println("Temperature converter program");
@@ -61,23 +43,30 @@ public class Exercise022v2 {
 
 		// ### Start ###
 		// Assignments
-		regexPattern = "^(-?[0-9]{1,10})(\\.[0-9]+)?(\\s((c|C)|(f|F)))$";
 		sc = new Scanner(System.in);
-		inputString = sc.nextLine();
-		if(regexChecker(regexPattern, inputString)) {
-			if (Double.parseDouble(inputString.split(" ")[0]) >= -459.67) {
-				if (Double.parseDouble(inputString.split(" ")[0]) <= 5000000) {
-					converter(inputString);
+		pattern = "^(-?[0-9]{1,10})(\\.[0-9]+)?$";
+		validUnit = false;
+		while (!validUnit) {
+			System.out.println("Insert a temperature unit (C or F)");
+			unit = sc.nextLine();
+			if (regexChecker("(^C$)|(^F$)", unit)) {
+				validUnit = true;
+				validMinValue = false;
+				while (!validMinValue) {
+					System.out.println("Insert a minimum temperature");
+					value1 = sc.nextLine();
+					if (regexChecker(pattern, value1)) {
+						validMinValue = true;
+						System.out.println("Insert a maximum temperature");
+					}
+					else {
+						System.out.println("Bad input insert a value between -459.67 and 5000000");
+					}
 				}
-				else
-					System.out.println("Bad input : Too hot !");
 			}
-			else
-				System.out.println("Bad input : Too cold !");
-
+			System.out.println("Bad input : Insert C or F");
 		}
-		else
-			System.out.println("Bad input");
-		sc.close();	
+
+		sc.close();
 	}
 }
