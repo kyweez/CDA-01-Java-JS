@@ -62,6 +62,40 @@ public class Exercise021v3 {
 		}
 	}
 
+	/**
+	 * This method will check if the value entered isn't out of bounds.
+	 * This method print a message if the value is too low/high
+	 * Otherwise it adds value in the array
+	 * @param stringArray
+	 * @param inputString
+	 */
+	public static void checkBounds (ArrayList<String> stringArray, String inputString) {
+		if (inputString.contains("mi") || inputString.contains("km")) {
+			if (Double.parseDouble(inputString.split(" ")[0]) >= 0.01){
+				if (Double.parseDouble(inputString.split(" ")[0]) <= 1000000)
+					stringArray.add(inputString);
+				else
+					System.out.println("Your value is too high");
+			}
+			else
+				System.out.println("Your value is too low");
+		}
+		else if (Double.parseDouble(inputString) >= 0.01){
+			if (Double.parseDouble(inputString) <= 1000000)
+				stringArray.add(inputString);
+			else
+				System.out.println("Your value is too high");
+		}
+		else
+			System.out.println("Your value is too low");
+	}
+	
+	/**
+	 * 
+	 * @param pattern
+	 * @param input
+	 * @return
+	 */
 	public static boolean regexChecker(String pattern, String input) {
 		Pattern regexPattern = Pattern.compile(pattern);
 		Matcher regexMatcher = regexPattern.matcher(input);
@@ -82,7 +116,7 @@ public class Exercise021v3 {
 
 		// Program title
 		System.out.println("Distance converter program");
-		System.out.println("==========================\n");
+		System.out.println("==========================");
 
 		// ### Start ###
 		// Assignments
@@ -98,27 +132,36 @@ public class Exercise021v3 {
 			stringArray.clear();
 			// Ask the user to input a valid value
 			while (!convert) {
-				System.out.println("Insert a disance");
+				System.out.println("\nInsert a disance between 0.01 and 1'000'000");
 				inputString = sc.nextLine();
 				// Fill in the array if the value correct
 				if (regexChecker(regexPattern, inputString)) {
-					stringArray.add(inputString);
+					checkBounds(stringArray, inputString);
 				} 
 				// If the value isn't correct, is a command ?
 				else if (inputString.equalsIgnoreCase("go") || inputString.equalsIgnoreCase("quit")) {
 					convert = true;
 					continueProgram = inputString.equalsIgnoreCase("go") ? true : false;
 				} 
-				// We tell the user his input is incorrect
+				// We tell the user's input is incorrect
 				else
 					System.out.println("Bad input");
 			}
 			formatTab(stringArray);
 			convertTab(stringArray);
 			// Print result
+			System.out.println("\n-----------------------------------");
+			System.out.println("############# RESULTS #############");
+			System.out.println("-----------------------------------");
+
 			for (int i = 0; i < stringArray.size(); i++) {
 				System.out.println(stringArray.get(i));
 			}
+			System.out.println("-----------------------------------");
+			if (continueProgram)
+				System.out.println("RESTART PRORGRAM");
+			else
+				System.out.println("END OF PRORGRAM");
 		}
 		sc.close();
 	}
