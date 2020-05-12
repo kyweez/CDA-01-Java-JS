@@ -16,6 +16,30 @@ import java.util.regex.*;
  * @author Kyweez
  */
 public class Exercise021v3 {
+	public static String conversion(String toConvert) {
+		String[] convertedValue;
+		double value;
+		convertedValue = toConvert.split(" ");
+		if (convertedValue[1].contentEquals("mi")) {
+			value = Double.parseDouble(convertedValue[0])*1.609;
+			convertedValue[1] = "km";
+		}
+		return convertedValue[0];
+	}
+	
+	public static void convertTab(ArrayList<String> tab) {
+		for (int i = 0; i < tab.size(); i++) {
+			if (!tab.get(i).contains("km")) {
+				tab.set(i, tab.get(i).concat(conversion(tab.get(i))));
+			}
+		}
+	}
+	public static void formatTab(ArrayList<String> tab) {
+		for (int i = 0; i < tab.size(); i++) {
+			if (!tab.get(i).contains("km") && !tab.get(i).contains("mi"))
+				tab.set(i, tab.get(i).concat(" km"));
+		}
+	}
 
 	public static boolean regexChecker(String pattern, String input) {
 		Pattern regexPattern = Pattern.compile(pattern);
@@ -30,7 +54,6 @@ public class Exercise021v3 {
 		// Variables declaration
 		Scanner sc;
 		String regexPattern;
-		String regexAction;
 		String inputString;
 		ArrayList<String> stringArray;
 		boolean convert;
@@ -43,28 +66,29 @@ public class Exercise021v3 {
 		// ### Start ###
 		// Assignments
 		regexPattern = "^([0-9]{1,10})(\\.[0-9]+)?(\\s(km|mi))?$";
-		regexAction = "^go$|^quit$";
-		convert = false;
 		continueProgram = true;
 		stringArray = new ArrayList<String>();
 		sc = new Scanner(System.in);
 		while (continueProgram) {
+			convert = false;
+			stringArray.clear();
 			while (!convert) {
 				System.out.println("Insert a disance");
 				inputString = sc.nextLine();
 				if (regexChecker(regexPattern, inputString)) {
 					stringArray.add(inputString);
-				} 
-				else if (inputString.equalsIgnoreCase(regexAction)) {
+				} else if (inputString.equalsIgnoreCase("go") || inputString.equalsIgnoreCase("quit")) {
 					convert = true;
 					continueProgram = inputString.equalsIgnoreCase("go") ? true : false;
-				} 
-				else {
+				} else {
 					System.out.println("Bad input");
 				}
 			}
-
-			sc.close();
+			formatTab(stringArray);
+			for (int i = 0; i < stringArray.size(); i++) {
+				System.out.println(stringArray.get(i));
+			}
 		}
+		sc.close();
 	}
 }
