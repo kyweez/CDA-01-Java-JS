@@ -4,7 +4,10 @@ import java.util.regex.*;
 
 /**
  * The user enters a value in kilometers between 0.01 and 1,000,000.
- * If the value is out of range, the user is asked to enter a new value. If the value is equal to "q", the program ends and closes.
+ * If the value is out of range, the user is asked to enter a new value.
+ * The user can enter as many values as he wants
+ * If the value is equal to "go" : Prompt all conversion and restart program
+ * If the value is equal to "quit": Prompt all conversion and stop program
  * 
  * WARNING !!!
  * This exercise do not check the user input error cases.
