@@ -16,24 +16,45 @@ import java.util.regex.*;
  * @author Kyweez
  */
 public class Exercise021v3 {
+	/**
+	 * 
+	 * @param distance we need to convert
+	 * @return converted distance with the unity (and '=' sign)
+	 */
 	public static String conversion(String toConvert) {
 		String[] convertedValue;
 		double value;
+		
+		// We store the value and the unity in a String[]
 		convertedValue = toConvert.split(" ");
+		//We convert the value and the unity
 		if (convertedValue[1].contentEquals("mi")) {
 			value = Double.parseDouble(convertedValue[0])*1.609;
 			convertedValue[1] = "km";
 		}
-		return convertedValue[0];
+		else {
+			value = Double.parseDouble(convertedValue[0])/1.609;
+			convertedValue[1] = "mi";
+		}
+		return (" = " + value + " " + convertedValue[1]);
 	}
 	
+	/**
+	 * This Method will replace the original value by the expected result
+	 * It applies on each index of the ArrayList
+	 * @param the formated array ("Value" + "Space" + "Unity"
+	 */
 	public static void convertTab(ArrayList<String> tab) {
 		for (int i = 0; i < tab.size(); i++) {
-			if (!tab.get(i).contains("km")) {
 				tab.set(i, tab.get(i).concat(conversion(tab.get(i))));
-			}
 		}
 	}
+	
+	/**
+	 * This method will format the array in order to apply operations on it
+	 * It adds "km" if the user didnt write a unity
+	 * @param the original array (user inputs)
+	 */
 	public static void formatTab(ArrayList<String> tab) {
 		for (int i = 0; i < tab.size(); i++) {
 			if (!tab.get(i).contains("km") && !tab.get(i).contains("mi"))
@@ -69,22 +90,32 @@ public class Exercise021v3 {
 		continueProgram = true;
 		stringArray = new ArrayList<String>();
 		sc = new Scanner(System.in);
+		
+		// Launch the program until the user input "quit"
 		while (continueProgram) {
 			convert = false;
+			// Reset the array if the loop start again ("go" command)
 			stringArray.clear();
+			// Ask the user to input a valid value
 			while (!convert) {
 				System.out.println("Insert a disance");
 				inputString = sc.nextLine();
+				// Fill in the array if the value correct
 				if (regexChecker(regexPattern, inputString)) {
 					stringArray.add(inputString);
-				} else if (inputString.equalsIgnoreCase("go") || inputString.equalsIgnoreCase("quit")) {
+				} 
+				// If the value isn't correct, is a command ?
+				else if (inputString.equalsIgnoreCase("go") || inputString.equalsIgnoreCase("quit")) {
 					convert = true;
 					continueProgram = inputString.equalsIgnoreCase("go") ? true : false;
-				} else {
+				} 
+				// We tell the user his input is incorrect
+				else
 					System.out.println("Bad input");
-				}
 			}
 			formatTab(stringArray);
+			convertTab(stringArray);
+			// Print result
 			for (int i = 0; i < stringArray.size(); i++) {
 				System.out.println(stringArray.get(i));
 			}
