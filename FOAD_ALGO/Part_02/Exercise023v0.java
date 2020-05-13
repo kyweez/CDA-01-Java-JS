@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * 
@@ -14,11 +15,11 @@ public class Exercise023v0 {
 		if (inputNumber == searchedNumber)
 			return (true);
 		else if (inputNumber < searchedNumber) {
-			System.out.println("It' more\n");
+			System.out.println("It's more\n");
 			return (false);
 		}
 		else {
-			System.out.println("It' less\n");
+			System.out.println("It's  less\n");
 			return (false);
 		}
 	}
@@ -36,7 +37,14 @@ public class Exercise023v0 {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		byte input = 0;
+		byte toFind = (byte)randomByte(100);
+		byte count = 0;
+		boolean errorTest;
+		boolean finish = false;
 
+		sc.close();
 	}
 
 }
