@@ -1,7 +1,6 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.*;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
 
 /**
  * The user inputs a numerical value between -459.67 and 5,000,000 followed by the temperature unit:
@@ -19,6 +18,14 @@ import javax.swing.text.StyledEditorKit.BoldAction;
  */
 public class Exercise022v2 {
 
+	public static double converter(double temperature, String unit) {
+		if (unit.equals("C"))
+			return ((temperature*9/5)+32);
+		else
+			return ((temperature-32)*5/9);
+
+	}
+	
 	public static boolean boundsChecker(String inputValue, double min, double max) {
 		double value = Double.parseDouble(inputValue);
 		if (value >= min && value <= max)
@@ -73,11 +80,11 @@ public class Exercise022v2 {
 		Scanner sc = new Scanner(System.in);;
 		String unit;
 		String paternUnit = "(^C$)|(^F$)";
-		String patternValue = "^(-?[0-9]{1,10})(\\\\.[0-9]+)?$";
+		String patternValue = "^(-?[0-9]{1,10})(.[0-9]+)?$";
 		double value1;
 		double value2 = 0;
 		double[] bound = {-459.67, 5000000};
-		boolean validValue = true;
+		boolean validValue = false;
 		
 
 		// Program title
@@ -88,13 +95,17 @@ public class Exercise022v2 {
 		// Assignments
 		unit = setInputString(sc, paternUnit);
 		value1 = setInputDouble(sc, patternValue, bound);
-		while (validValue) {
+		while (!validValue) {
 			value2 = setInputDouble(sc, patternValue, bound);
-			if (value1 > value2) {
+			if (value1 < value2)
+				validValue = true;
+			else
 				System.out.println("The second value must be higher than the first one !");
-			}
 		}
-		System.out.println("RESULT = " + value1 +" "+ value2 +" "+ unit);
 		sc.close();
+		for (double i = value1; i <= value2; i++) {
+			System.out.print(Math.round(i) + " °" + unit + " = ");
+			System.out.println(converter(Math.round(i), unit) + " °" + (unit.equals("C")?"F":"C"));
+		}
 	}
 }
