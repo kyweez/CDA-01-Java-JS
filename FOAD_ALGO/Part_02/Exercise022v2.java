@@ -44,7 +44,7 @@ public class Exercise022v2 {
 		}
 		return (Double.parseDouble(input));
 	}
-	
+
 	public static String setInputString (Scanner sc, String pattern) {
 		boolean validInput = false;
 		String input = "";
