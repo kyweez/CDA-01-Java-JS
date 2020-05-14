@@ -5,27 +5,33 @@ const rl = readline.createInterface({
 	output: process.stdout
 });
 
-// Math.random returns a number between 0 and 1. 
-let randomNumber = Math.round(Math.random() * (20));
-let i = 0;
-
-function askNumber(randomNumber){
-	rl.question('Find the number :', (answer) => {
-		test(answer, randomNumber);
-	});
-}
-
-function test(answer, randomNumber, i){
-	console.log(`i = ${i}`+ typeof i);
-	i++;
-	if (Number(answer) === randomNumber){
-		console.log(`You found ${answer} in ${i} tries.`);
-	}
+function test(randomNumber, answer, count){
+	count = count + 1;
+	if (answer > randomNumber)
+		console.log(`It's less, try again...\n`);
+	else if(answer < randomNumber)
+		console.log(`It's more, try again...\n`)
 	else{
-		console.log(Number(answer) < randomNumber ? "It's more" : "It's less");
-		console.log("Try again");
-		askNumber(randomNumber);
+		console.log(`You found the mystery number (${randomNumber}) in ${count} tries\n`)
+		rl.close();
+		process.exit();
 	}
+	askNumber(randomNumber, count);
 }
 
-askNumber(randomNumber);
+function askNumber(randomNumber, count){
+	rl.question(`Insert a number : `, (answer) => {
+		test(randomNumber, answer, count);
+	})
+}
+
+function guessMyNumber(){
+	console.log(`=========================`);
+	console.log(`### Fork game program ###`);
+	console.log(`=========================`);
+	var randomNumber = Math.round(Math.random() * (100));
+	var count = 0;
+	askNumber(randomNumber, count);
+}
+
+guessMyNumber();
