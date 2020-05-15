@@ -16,13 +16,13 @@ const rl = readline.createInterface({
 
 
 function shopsNumber (answer){
-    let temp = Number(answer);
+    let money = Number(answer);
     let count = 0;
     console.log(`\nDetails :\n¯¯¯¯¯¯¯¯¯`);
-    while (temp > 1){
-        temp -= (temp/2 +1);
+    while (money > 1){
+        money -= (money/2 +1);
         //We round to avoid float in the display. But we keep the calcul as asked.
-        console.log(`After the visit ${count} Barnabe has ${Math.round(temp)} euros left`);
+        console.log(`After the visit ${count} Barnabe has ${Math.round(money)} euros left`);
         count ++;
     }
     console.log (`\nUser had ${answer} euros and visited ${count} shops\n`);
