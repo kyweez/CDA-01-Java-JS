@@ -23,7 +23,7 @@ const rl = readline.createInterface({
  * @param {*} winner (winner name)
  */
 function gameOver(winner) {
-    console.log(`${winner} won this game.`);
+    console.log(`\n${winner} won this game !!!\n`);
     rl.close();
     process.exit();
 }
@@ -46,10 +46,26 @@ function gameStatus(score) {
  * @param {*} score (score table)
  */
 function printScore(score) {
-    console.log(score);
-    console.log(`Current Score :`);
-    console.log(`Computer : ${score[0]}`);
-    console.log(`Player   : ${score[1]}`);
+    if (score[0] < 10 && score[1] < 10) {
+        console.log(`###################`);
+        console.log(`## Current Score ##`);
+        console.log(`## Computer : ${score[0]}  ##`);
+        console.log(`## Player   : ${score[1]}  ##`);
+        console.log(`###################`);
+    }
+    else {
+        console.log(`####################`);
+        console.log(`## Current Score  ##`);
+        if (score[0] == 10) {
+            console.log(`## Computer : ${score[0]}  ##`);
+            console.log(`## Player   : ${score[1]}   ##`);
+        }
+        else {
+            console.log(`## Computer : ${score[0]}   ##`);
+            console.log(`## Player   : ${score[1]}  ##`);
+        }
+        console.log(`####################`);
+    }
 }
 
 /**
@@ -58,6 +74,7 @@ function printScore(score) {
  * @param {*} randomNumber (random generated number)
  */
 function printInput(answer, randomNumber) {
+    console.log(`-----------------------------------`);
     console.log(`Your input     : ${answer}`);
     console.log(`Computer input : ${randomNumber}`);
 }
@@ -73,24 +90,31 @@ function compareValues(answer, randomNumber, score) {
         if (answer - randomNumber == 2) {
             score[1] += 1;
             console.log(`Player won this round`);
+            console.log(`-----------------------------------\n`);
+
         }
         else {
             score[0] += 1;
             console.log(`Computer won this round`);
+            console.log(`-----------------------------------\n`);
         }
     }
     else if (randomNumber > answer) {
         if (randomNumber - answer == 2) {
             score[0] += 1;
             console.log(`Computer won this round`);
+            console.log(`-----------------------------------\n`);
         }
         else {
             score[1] += 1;
             console.log(`Player won this round`);
+            console.log(`-----------------------------------\n`);
         }
     }
-    else
+    else {
         console.log(`Nobody won this round`);
+        console.log(`-----------------------------------\n`);
+    }
 }
 
 /**
@@ -109,7 +133,7 @@ function checkUserInput(answer, randomNumber, score) {
         printScore(score);
     }
     else if (answer < 0) {
-        console.log(`END OF THE PROGRAM - INTERRUPTED BY USER`);
+        console.log(`\nEND OF THE PROGRAM - INTERRUPTED BY USER`);
         rl.close();
         process.exit();
     }
@@ -125,7 +149,7 @@ function checkUserInput(answer, randomNumber, score) {
  * @param {*} score (score table)
  */
 function init(score) {
-    rl.question(`Insert a number between 0 and 2 : `, (answer) => {
+    rl.question(`\nInsert a number between 0 and 2 : `, (answer) => {
         checkUserInput(answer, Math.round(Math.random() * 2), score);
     })
 }
