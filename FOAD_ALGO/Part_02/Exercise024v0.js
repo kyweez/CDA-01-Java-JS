@@ -14,14 +14,17 @@ const rl = readline.createInterface({
 	output: process.stdout
 });
 
-
+/**
+ * This function calculates the number of shop you can visit with the amount input
+ * @param {*} answer 
+ */
 function shopsNumber (answer){
     let money = Number(answer);
     let count = 0;
     console.log(`\nDetails :\n¯¯¯¯¯¯¯¯¯`);
     while (money > 1){
         money -= (money/2 +1);
-        //We round to avoid float in the display. But we keep the calcul as asked.
+        //We round to avoid float in the display. But we keep the calcul as asked
         console.log(`After the visit ${count} Barnabe has ${Math.round(money)} euros left`);
         count ++;
     }
@@ -30,6 +33,9 @@ function shopsNumber (answer){
     process.exit();
 }
 
+/**
+ * This function asks the user to input an amount 
+ */
 function askNumber(){
 	rl.question(`Barnabe has this starting amount : `, (answer) => {
 		shopsNumber(answer);
