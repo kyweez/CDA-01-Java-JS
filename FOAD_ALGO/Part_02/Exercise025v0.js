@@ -8,11 +8,34 @@
 * The game ends when one of the two players (the computer or the human player) scored 10 points
 * or when the player introduces a negative number which indicates he wants to stop playing.
 */
+
 const readline = require(`readline`);
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
+
+function gameOver(winner) {
+    console.log(`${winner} won this game.`);
+    rl.close();
+    process.exit();
+}
+
+function gameStatus(computerScore, playerScore) {
+    if (computerScore == 10)
+        gameOver("Computer");
+    else if (playerScore == 10)
+        gameOver("Player");
+    else
+        init();
+}
+
+function printScore(computerScore, playerScore) {
+    console.log(`Actual Score :`);
+    console.log(`Computer : ${computerScore}`);
+    console.log(`Player   : ${playerScore}`);
+}
+
 function printInput(answer, randomNumber) {
     console.log(`Your input     : ${answer}`);
     console.log(`Computer input : ${randomNumber}`);
@@ -21,21 +44,25 @@ function printInput(answer, randomNumber) {
 function compareValues(answer, randomNumber, computerScore, playerScore) {
     if (answer > randomNumber) {
         if (answer - randomNumber == 2) {
-            playerScore++;
+            playerScore += 1;
+            console.log (`1 - playerScore = ${playerScore} / computerScore = ${computerScore}`);
             console.log(`Player won this round`);
         }
         else {
-            computerScore++;
+            computerScore += 1;
+            console.log (`1 - playerScore = ${playerScore} / computerScore = ${computerScore}`);
             console.log(`Computer won this round`);
         }
     }
     else if (randomNumber > answer) {
         if (randomNumber - answer == 2) {
-            computerScore++;
+            computerScore += 1;
+            console.log (`1 - playerScore = ${playerScore} / computerScore = ${computerScore}`);
             console.log(`Computer won this round`);
         }
         else {
-            playerScore++;
+            playerScore += 1;
+            console.log (`1 - playerScore = ${playerScore} / computerScore = ${computerScore}`);
             console.log(`Player won this round`);
         }
     }
@@ -43,25 +70,30 @@ function compareValues(answer, randomNumber, computerScore, playerScore) {
         console.log(`Nobody won this round`);
 }
 
-function checkUserInput(answer, randomNumber, computerScore, playerScore) {
+function checkUserInput(answer, randomNumber) {
+    var computerScore = 0;
+    var playerScore = 0;
+
     if (answer >= 0 && answer <= 2) {
         printInput(answer, randomNumber);
         compareValues(answer, randomNumber, computerScore, playerScore);
-        printScore (computerScore, playerScore);
+        printScore(computerScore, playerScore);
     }
     else if (answer < 0) {
         console.log(`END OF THE PROGRAM - INTERRUPTED BY USER`);
         rl.close();
         process.exit();
     }
-    else
+    else {
+        console.log(`Bad input...`)
         init();
-
+    }
+    gameStatus(computerScore, playerScore);
 }
 
-function init(computerScore, playerScore) {
+function init() {
     rl.question(`Insert a number between 0 and 2 : `, (answer) => {
-        checkUserInput(answer, Math.round(Math.random() * 2), computerScore, playerScore);
+        checkUserInput(answer, Math.round(Math.random() * 2));
     })
 }
 
@@ -69,9 +101,9 @@ function zeroTwoGame() {
     console.log(`===============================`);
     console.log(`### Zero - Two Game Program ###`);
     console.log(`===============================`);
-    let computerScore = 0;
-    let playerScore = 0;
-    init(computerScore, playerScore);
+
+
+    init();
 
 }
 
