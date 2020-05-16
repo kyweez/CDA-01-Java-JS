@@ -10,14 +10,37 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-function askAge(){
-    rl.question(`Enter an age`, answer =>{
-        fonction de rappel.
+fucntion storeValue(answer, ageTable){
+
+}
+
+function checkInput(answer, ageTable){
+    if (answer > 0 && answer < 120){
+
+    }
+    else if (answer >= 120 ){
+        console.log(`This is too old...`);
+    }
+    else{
+        console.log(`Bad input...\n`);
+    }
+}
+
+function askAge(ageTable){
+    rl.question(`Please input an age : `, answer =>{
+        checkInput(answer, ageTable);
     });
 }
 
 function main(){
-    askAge();
+    console.log(`============================`);
+    console.log(`### Young people Program ###`);
+    console.log(`============================`);
+
+    //The tab[0] will be the iterator and tab[1 -20] the values
+    let ageTable = new Array(21);
+
+    askAge(ageTable);
 }
 
 main();
