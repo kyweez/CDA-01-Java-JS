@@ -1,8 +1,9 @@
 /**
-* It is a question of counting all people of age strictly less than 20 years among a sample of 20 people. 
-* The user is prompted to enter the 20 values.
-* Describe the algorithm that displays the number of young people and code the solution. 
-*/
+ * Same algo than 2.7.1 but changing some rules:
+ * If everyone is under 20, display "ALL PEOPLE ARE UNDER 20"
+ * If no one is younger than 20, post "ALL PEOPLE ARE MORE THAN 20 YEARS"
+ * Otherwise, display the number of people for each category ("- from 20, + from 20, = to 20).
+ */
 
 /**
  * Instanciating readline module
