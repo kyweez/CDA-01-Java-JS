@@ -16,6 +16,12 @@ const rl = readline.createInterface({
 	output: process.stdout
 });
 
+/**
+ * This function tests if the number to find is equal/more/low than the input one
+ * @param {*} randomNumber 
+ * @param {*} answer (input)
+ * @param {*} count (count = number of tries)
+ */
 function test(randomNumber, answer, count){
 	count = count + 1;
 	if (answer > randomNumber)
@@ -30,6 +36,9 @@ function test(randomNumber, answer, count){
 	askNumber(randomNumber, count);
 }
 
+/**
+ * This function asks the user to input a number to find 
+ */
 function askNumber(randomNumber, count){
 	rl.question(`Insert a number : `, (answer) => {
 		test(randomNumber, answer, count);
