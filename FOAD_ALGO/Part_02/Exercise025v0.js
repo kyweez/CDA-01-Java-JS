@@ -9,18 +9,29 @@
 * or when the player introduces a negative number which indicates he wants to stop playing.
 */
 
+/**
+ * Instanciating readline module
+ */
 const readline = require(`readline`);
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
 
+/**
+ * This function gives the name of the winner and closes the program
+ * @param {*} winner (winner name)
+ */
 function gameOver(winner) {
     console.log(`${winner} won this game.`);
     rl.close();
     process.exit();
 }
 
+/**
+ * This function checks if the game is over (checking the score)
+ * @param {*} score (score table)
+ */
 function gameStatus(score) {
     if (score[0] == 10)
         gameOver("Computer");
@@ -30,18 +41,33 @@ function gameStatus(score) {
         init(score);
 }
 
+/**
+ * This fucntion displays the current score
+ * @param {*} score (score table)
+ */
 function printScore(score) {
     console.log(score);
-    console.log(`Actual Score :`);
+    console.log(`Current Score :`);
     console.log(`Computer : ${score[0]}`);
     console.log(`Player   : ${score[1]}`);
 }
 
+/**
+ * 
+ * @param {*} answer (user input)
+ * @param {*} randomNumber (random generated number)
+ */
 function printInput(answer, randomNumber) {
     console.log(`Your input     : ${answer}`);
     console.log(`Computer input : ${randomNumber}`);
 }
 
+/**
+ * This function compares number and sets the results up
+ * @param {*} answer (user input)
+ * @param {*} randomNumber (random generated number)
+ * @param {*} score (score table)
+ */
 function compareValues(answer, randomNumber, score) {
     if (answer > randomNumber) {
         if (answer - randomNumber == 2) {
@@ -67,6 +93,15 @@ function compareValues(answer, randomNumber, score) {
         console.log(`Nobody won this round`);
 }
 
+/**
+ * This function checks the user input.
+ * If input is a negative number, it closes the program
+ * If input is bad, call back the init function (with readline)
+ * Else the program continues
+ * @param {*} answer (user input)
+ * @param {*} randomNumber (random generated number)
+ * @param {*} score (score table)
+ */
 function checkUserInput(answer, randomNumber, score) {
     if (answer >= 0 && answer <= 2) {
         printInput(answer, randomNumber);
@@ -85,6 +120,10 @@ function checkUserInput(answer, randomNumber, score) {
     gameStatus(score);
 }
 
+/**
+ * This function asks the user to input a number and generate a random number
+ * @param {*} score (score table)
+ */
 function init(score) {
     rl.question(`Insert a number between 0 and 2 : `, (answer) => {
         checkUserInput(answer, Math.round(Math.random() * 2), score);
@@ -96,6 +135,7 @@ function zeroTwoGame() {
     console.log(`### Zero - Two Game Program ###`);
     console.log(`===============================`);
 
+    //I had to use a table, because variable are locale, then i can't change it 
     var score = new Int32Array(2);
     score[0] = 0;
     score[1] = 0;
