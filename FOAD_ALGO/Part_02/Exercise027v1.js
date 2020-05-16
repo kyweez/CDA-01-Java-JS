@@ -25,7 +25,7 @@ function printResult(count) {
 
 /**
  * This function count the number of people younger than 20
- * @param {*} ageTable 
+ * @param {*} ageTable
  */
 function countYoung(ageTable) {
     let count = 0;
@@ -36,6 +36,11 @@ function countYoung(ageTable) {
     return (count);
 }
 
+/**
+ * This function store the valid value in the table 
+ * @param {*} answer (input)
+ * @param {*} ageTable 
+ */
 function storeValue(answer, ageTable) {
     ageTable[ageTable[0]] = answer;
     ageTable[0]++;
@@ -44,6 +49,12 @@ function storeValue(answer, ageTable) {
     }
 }
 
+/**
+ * This function check if the input is correct
+ * Call back the askAge function if the value is incorrect (without doing anything else)
+ * @param {*} answer 
+ * @param {*} ageTable 
+ */
 function checkInput(answer, ageTable) {
     if (answer > 0 && answer < 120) {
         storeValue(answer, ageTable);
@@ -57,6 +68,10 @@ function checkInput(answer, ageTable) {
     askAge(ageTable);
 }
 
+/**
+ * Ask an age to the user
+ * @param {*} ageTable 
+ */
 function askAge(ageTable) {
     rl.question(`Please input an age : `, answer => {
         checkInput(answer, ageTable);
