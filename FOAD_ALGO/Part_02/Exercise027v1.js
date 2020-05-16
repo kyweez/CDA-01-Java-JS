@@ -60,7 +60,7 @@ function checkInput(answer, ageTable) {
         storeValue(answer, ageTable);
     }
     else if (answer >= 120) {
-        console.log(`This is too old...`);
+        console.log(`This is too old...\n`);
     }
     else {
         console.log(`Bad input...\n`);
