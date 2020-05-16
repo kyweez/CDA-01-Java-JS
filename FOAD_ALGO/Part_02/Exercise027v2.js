@@ -22,8 +22,12 @@ function printTab(ageTable){
 }
 
 /**
- * This function prints the result and closes the program 
- * @param {*} count 
+ * This function prints results in function of type of people.
+ * This closes the program after
+ * @param {*} ageTable 
+ * @param {*} countYoung 
+ * @param {*} countMiddleAge 
+ * @param {*} countOld 
  */
 function printResult(ageTable, countYoung, countMiddleAge, countOld) {
     console.log(`________________________________________________________`);
@@ -41,7 +45,7 @@ function printResult(ageTable, countYoung, countMiddleAge, countOld) {
 }
 
 /**
- * This function count the number of people younger than 20
+ * This function count the number of people younger than 20, older than 20 and equals to 20
  * @param {*} ageTable
  */
 function countPeople(ageTable) {
