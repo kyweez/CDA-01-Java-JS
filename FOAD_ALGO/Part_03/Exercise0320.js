@@ -86,6 +86,9 @@ function askLetter(stringTable){
 }
 
 function main() {
+    console.log(`\n======================`);
+    console.log(`### FIND A LETTER  ###`);
+    console.log(`======================`);
     let stringTable = new Array(3);
     stringTable[0] = ".";
     stringTable[1] = "This is a test! And this test should contain 5 i.";
