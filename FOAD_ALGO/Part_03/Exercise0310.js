@@ -50,7 +50,7 @@ function checkInput(answer, table){
     }
     else{
         console.log(`Bad input...`);
-        askNumber(answer, table);
+        askNumber(table);
     }
 }
 
