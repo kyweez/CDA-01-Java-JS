@@ -14,28 +14,43 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
+/**
+ * This function convert a table to a string (easier for display)
+ * @param {*} table 
+ */
 function tableToString(table) {
     let stringTable = "";
-    for (let i = 0; i < table.length; i++){
+    for (let i = 0; i < table.length; i++) {
         stringTable += table[i] + " ";
     }
     return (stringTable);
 }
 
-function iterationNumber(answer, table){
+/**
+ * This function returns the number of number iterations in the table
+ * @param {*} answer 
+ * @param {*} table 
+ */
+function iterationNumber(answer, table) {
     let count = 0;
-    for (let i=0; i<table.length; i++){
+    for (let i = 0; i < table.length; i++) {
         if (answer == table[i])
             count++;
     }
     return (count);
 }
 
-function printResult(answer, table){
+/**
+ * This function prints the result of the game
+ * It calls a function to print the sorted table then an iteration checking
+ * @param {*} answer 
+ * @param {*} table 
+ */
+function printResult(answer, table) {
     let count = iterationNumber(answer, table);
-    
+
     console.log(`\nRandom sorted table : ${tableToString(table)}\n`);
-    if (count == 0){
+    if (count == 0) {
         console.log(`You lost, ${answer} isn't in this list\n`);
     }
     else
@@ -44,16 +59,39 @@ function printResult(answer, table){
     process.exit();
 }
 
-function checkInput(answer, table){
-    if (answer >=0 && answer<=20){
-        printResult(answer,table);
+/**
+ * This function checks the user input. 
+ * If it's bad, calls back the askNumber function.
+ * Else calls printResult function
+ * @param {*} answer 
+ * @param {*} table 
+ */
+function checkInput(answer, table) {
+    if (answer >= 0 && answer <= 20) {
+        printResult(answer, table);
     }
-    else{
+    else {
         console.log(`Bad input...`);
         askNumber(table);
     }
 }
 
+/**
+ * This function asks the user to input a number bettween 0 and 20
+ * Then it checks if the input is valid
+ * @param {*} table 
+ */
+function askNumber(table) {
+    rl.question(`\nEnter a number a number between 0 and 20 : `, answer => {
+        checkInput(answer, table);
+    });
+}
+
+/**
+ * This function sorts a table of integers
+ * @param {*} table
+ * @returns a sorted table
+ */
 function sort(table) {
     let i;
     let j;
@@ -88,12 +126,6 @@ function generateTable() {
         table[i] = Math.round(Math.random() * 20);
     }
     return (table);
-}
-
-function askNumber(table) {
-    rl.question(`\nEnter a number a number between 0 and 20 : `, answer => {
-        checkInput(answer, table);
-    });
 }
 
 function main() {
