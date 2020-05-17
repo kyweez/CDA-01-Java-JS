@@ -19,6 +19,7 @@ const regexLetter = /^[a-zA-Z]{1}$/;
 
 function printResult(answer, stringTable){
     let count;
+    console.log(`Results with the lette "${answer}":\n`);
     for (let i=0; i<stringTable.length; i++){
         count = 0;
         if (stringTable[i].length == 1)
@@ -34,14 +35,19 @@ function printResult(answer, stringTable){
                 console.log(`String ${i} contains ${count} time(s) the letter ${answer}`)
         }
     }
+    console.log(`________________________________________________________________\n`);
     rl.close();
     process.exit();
 }
 
 function printStrings(stringTable){
+    console.log(`________________________________________________________________\n`);
+    console.log(`Given strings :\n`);
     for (let i = 0; i < stringTable.length; i++){
         console.log(`String ${i+1} : ${stringTable[i]}`);
     }
+    console.log(`________________________________________________________________\n`);
+
 }
 
 function checkInput(answer, stringTable){
@@ -56,7 +62,7 @@ function checkInput(answer, stringTable){
 }
 
 function askLetter(stringTable){
-    rl.question(`Please insert a letter you want to find : `, answer => {
+    rl.question(`\nPlease insert a letter you want to find : `, answer => {
         checkInput(answer, stringTable);
     });
 }
