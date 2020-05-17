@@ -107,9 +107,9 @@ function asktext(string) {
 
 function main() {
     let string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas porttitor nulla id dui tempor pretium. Nunc tincidunt.";
-    console.log(`\n=================================`);
-    console.log(`### FIND THE NUMBER OF LETTERS###`);
-    console.log(`=================================`);
+    console.log(`\n==================================`);
+    console.log(`### FIND THE NUMBER OF LETTERS ###`);
+    console.log(`==================================`);
     console.log(`\nYou have to insert a text. There are 4 rules.`);
     console.log(`     - The text must be longer than 120 characters`);
     console.log(`     - The text must start with an uppercase letter`);
