@@ -17,6 +17,11 @@ const rl = readline.createInterface({
 //This regex checks if the string has more than a letter.
 const regexLetter = /^[a-zA-Z]{1}$/;
 
+/**
+ * This function prinnts the result.
+ * @param {*} answer 
+ * @param {*} stringTable 
+ */
 function printResult(answer, stringTable){
     let count;
     console.log(`Results with the lette "${answer}":\n`);
@@ -40,6 +45,10 @@ function printResult(answer, stringTable){
     process.exit();
 }
 
+/**
+ * This function [prints each given strings]
+ * @param {*} stringTable 
+ */
 function printStrings(stringTable){
     console.log(`________________________________________________________________\n`);
     console.log(`Given strings :\n`);
@@ -50,6 +59,11 @@ function printStrings(stringTable){
 
 }
 
+/**
+ * This function use a regex to check if the user input a single letter
+ * @param {*} answer 
+ * @param {*} stringTable 
+ */
 function checkInput(answer, stringTable){
     if (answer.match(regexLetter)){
         printStrings(stringTable);
@@ -61,8 +75,12 @@ function checkInput(answer, stringTable){
     }
 }
 
+/**
+ * This function asks the user to input a letter he wants to find in given strings
+ * @param {*} stringTable 
+ */
 function askLetter(stringTable){
-    rl.question(`\nPlease insert a letter you want to find : `, answer => {
+    rl.question(`\nPlease insert a letter you want to find (case sensitive): `, answer => {
         checkInput(answer, stringTable);
     });
 }
