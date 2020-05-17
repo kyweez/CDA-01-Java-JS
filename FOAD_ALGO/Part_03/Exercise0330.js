@@ -17,20 +17,65 @@ const rl = readline.createInterface({
 //This regex checks if the string has more than a letter.
 const regex = /^([A-Z]{1})([a-zA-Z ,'\.]{117,})([a-z\.]{1}[?!\.]{1}$)$/;
 
-function checkLetters(answer){
-    console.log(`\n`);
-    console.log(answer);
+function printResult(resultTab, answer) {
+    console.log(`\nInput sentence : ${answer}`);
+    console.log(`______________________________\n`);
+    console.log('RESULTS : ');
+    for (let i = 0; i < resultTab.length; i++) {
+        console.log(`${String.fromCharCode(97 + i)} : ${resultTab[i]} time(s)`);
+    }
+    console.log(`______________________________\n`);
 }
 
-function checkInput(answer, string){
-    if (!answer.match(regex) && answer!=""){
+function generateResultTab() {
+    let tab = new Array(26);
+    for (let i = 0; i < tab.length; i++) {
+        tab[i] = 0;
+    }
+    return (tab);
+}
+
+function generateAlphabetTab() {
+    let alphabet = new Array(26);
+    for (let i = 0; i < alphabet.length; i++) {
+        alphabet[i] = String.fromCharCode(97 + i);
+    }
+    return (alphabet);
+}
+
+function checkLetters(answer) {
+    let i = 0;
+    let j;
+    let found;
+    let alphabet = generateAlphabetTab();
+    let result = generateResultTab();
+
+    while (i < answer.length) {
+        j = 0;
+        found = false;
+        while (!found && j < alphabet.length) {
+            if (answer.charAt(i).toLowerCase() == alphabet[j]) {
+                found = true;
+                result[j]++;
+            }
+            j++;
+        }
+        i++;
+    }
+    return (result);
+}
+
+function checkInput(answer, string) {
+    if (!answer.match(regex) && answer != "") {
         console.log(`Bad input. Try again and follow the rules...`);
         asktext(string);
     }
-    else{
+    else {
         if (answer == "")
             answer = string;
-        checkLetters(answer);
+        printResult(checkLetters(answer), answer);
+        rl.close();
+        process.exit();
     }
 }
 
@@ -51,7 +96,6 @@ function main() {
     console.log(`If nothing is inserted, the program will generate a text.`);
 
     asktext(string);
-
 }
 
 main();
