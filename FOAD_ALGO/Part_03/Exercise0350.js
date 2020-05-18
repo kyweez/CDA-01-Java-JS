@@ -32,8 +32,9 @@ const rl = readline.createInterface({
 const regex = /(?:^[a-zA-Z0-9]{2,}((\s{1}[a-zA-Z0-9]+)+)?\.{1})|(?:^\.{1})$/;
 
 function palindromeChecker(answer){
+    //TODO : gerer le cas du .
     let formatedString = answer;
-    formatedString = formatedString.replace(/\s./g, ""); // The g modifier means global : Every space in the string
+    formatedString = formatedString.replace(/\s/g, ""); // The g modifier means global : Every space in the string
     formatedString = formatedString.substring(0, formatedString.length - 1); // Supressing the final dot
     console.log(formatedString);
 
@@ -42,7 +43,11 @@ function palindromeChecker(answer){
 
 function checkInput(answer){
     if (answer.match(regex)){
-        palindromeChecker(answer);
+        if (answer.length == 1)
+            console.log(`This is an empty string`);
+        else{
+            palindromeChecker(answer);
+        }
     }
     else{
         console.log(`Bad input... Follow the rules!`);
