@@ -19,29 +19,48 @@
  */
 const readline = require(`readline`);
 const rl = readline.createInterface({
-    input: process.input(),
-    output: process.stdout()
+    input: process.stdin,
+    output: process.stdout
 });
 
 /**
  * This regex is used to check the input.
- * Start by a letter or a number. Accept spaces. End by a dot
+ * Start by a letter or a number only. Accept spaces followed by a letter at least. End by a dot
+ * If the only input is dot, works too.
+ * Check rules below (main function) for more information.
  */
-const regex = /(^[a-zA-Z0-9]{2,})([a-zA-Z0-9\s]+)(\.{1}$)/;
+const regex = /(?:^[a-zA-Z0-9]{2,}((\s{1}[a-zA-Z0-9]+)+)?\.{1})|(?:^\.{1})$/;
 
+function checkInput(){
+    
+}
 
+/**
+ * This function asks the user to insert a string. (rules explained before)
+ */
 function askSentence(){
-    rl.question(`Insert a string : `, answer =>{
-        fonction
+    rl.question(`\nInsert a string : `, answer =>{
+        checkInput(answer);
     });
 }
 
 
 function main() {
+    //Title
     console.log(`\n==========================`);
     console.log(`### PALINDROME PROGRAM ###`);
     console.log(`==========================`);
+    
+    //Rules
+    console.log(`You have to input a string. There are few rules :`)
+    console.log(`   - Your input must end by a dot and only one dot`);
+    console.log(`   - Your input must start by a letter or a number`);
+    console.log(`   - Special chars are forbidden`);
+    console.log(`   - No more than 1 space between words`);
+    console.log(`   - Your first word must do at least 2 chars`);
+    console.log(`   - You can't let a space before the end dot`);
 
+    //Begin
     askSentence();
 }
 
