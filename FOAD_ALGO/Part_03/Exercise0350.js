@@ -31,13 +31,36 @@ const rl = readline.createInterface({
  */
 const regex = /(?:^[a-zA-Z0-9]{2,}((\s{1}[a-zA-Z0-9]+)+)?\.{1})|(?:^\.{1})$/;
 
-function palindromeChecker(answer){
-    //TODO : gerer le cas du .
+/**
+ * This function returns a formated string.
+ * Spaces deletion with replace() string method
+ * Dot deletion by extracting the substring str.length - 1.
+ * 
+ * @param {*} answer
+ * @returns The formated string
+ */
+function formatString(answer){
     let formatedString = answer;
-    formatedString = formatedString.replace(/\s/g, ""); // The g modifier means global : Every space in the string
-    formatedString = formatedString.substring(0, formatedString.length - 1); // Supressing the final dot
-    console.log(formatedString);
 
+    formatedString = formatedString.replace(/\s/g, ""); // The g modifier means global (Every spaces in the string)
+    formatedString = formatedString.substring(0, formatedString.length - 1);
+    return (formatedString);
+}
+
+/**
+ * This function returns a boolean.
+ * True if answer is a palindrome, else returns false
+ * @param {*} answer 
+ */
+function palindromeChecker(answer){
+    let formatedString = formatString(answer);
+    let i = 0;
+    let j = formatedString.length;
+
+    while (i < j){
+        if (formatedString.charAt())
+    }
+    return (true);
 
 }
 
