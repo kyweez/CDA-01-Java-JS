@@ -35,7 +35,7 @@ const regex = /(?:^[a-zA-Z0-9]{2,}((\s{1}[a-zA-Z0-9]+)+)?\.{1})|(?:^\.{1})$/;
  * This function returns a formated string.
  * Spaces deletion with replace() string method
  * Dot deletion by extracting the substring str.length - 1.
- * 
+ * Format to lower case (in order to compare A with a correctly)
  * @param {*} answer
  * @returns The formated string
  */
@@ -44,7 +44,7 @@ function formatString(answer){
 
     formatedString = formatedString.replace(/\s/g, ""); // The g modifier means global (Every spaces in the string)
     formatedString = formatedString.substring(0, formatedString.length - 1);
-    return (formatedString);
+    return (formatedString.toLowerCase());
 }
 
 /**
@@ -55,13 +55,17 @@ function formatString(answer){
 function palindromeChecker(answer){
     let formatedString = formatString(answer);
     let i = 0;
-    let j = formatedString.length;
+    let j = formatedString.length - 1;
 
     while (i < j){
-        if (formatedString.charAt())
+        if (formatedString.charAt(i) === formatedString.charAt(j)){
+            i++;
+            j--;
+        }
+        else
+            return (false);
     }
     return (true);
-
 }
 
 function checkInput(answer){
@@ -69,8 +73,13 @@ function checkInput(answer){
         if (answer.length == 1)
             console.log(`This is an empty string`);
         else{
-            palindromeChecker(answer);
+            if(palindromeChecker(answer))
+                console.log(`\n${answer} IS A PALINDROME\n`);
+            else
+                console.log(`\n${answer} IS NOT A PALINDROME\n`);
         }
+        rl.close();
+        process.exit();
     }
     else{
         console.log(`Bad input... Follow the rules!`);
