@@ -37,9 +37,31 @@
 /**
  * @class Employee
  */
-class Employee
-{
-    // A vous de jouer...
+class Employee {
+    constructor(_id, _lastName, _firstName, _role, _salary, _hireDate) {
+        this.id = _id;
+        this.lastName = _lastName.toUpperCase(); // Format to uppercase all the name
+        this.firstName = _firstName.charAt(0).toUpperCase().concat(_firstName.substring(1).toLowerCase()); // Format firstname and role
+        this.role = _role.charAt(0).toUpperCase().concat(_role.substring(1).toLowerCase()); // chaNtaLE becomes Chantale
+        this.salary = _salary;
+        this.hireDate = _hireDate.toISOString().substring(0, 10); // ISO string returns something like 2018-07-22T05:22:13.000Z.
+        this.email = this.firstName.charAt(0).concat(this.lastName, `@email.fr`).toLowerCase();
+    }
+
+    getMonthlySalary() {
+        return (parseInt(this.salary * 0.75 / 12));
+    }
+
+    getSeniority() {
+        let result;
+        // Instantiate date objects to compare them. This avoids working on formatted strings.
+        let currentDate = new Date();
+        let hireDate = new Date(this.hireDate);
+        // We make the difference. The returned value is in milliseconds ...
+        let diff = currentDate.getTime() - hireDate.getTime();
+        console.log(diff);
+
+    }
 }
 
 
@@ -63,3 +85,11 @@ console.log(employees); // export des employés dans la console
 
 
 // Écrivez votre code à partir de la ligne suivante...
+var employee2 = new Employee(2, 'Bon', 'Jean', 'Charcutier', 22000, new Date('2020-12-28'));
+var employee3 = new Employee(3, 'Proviste', 'Alain', 'Formateur', 180000, new Date('2020-12-28'));
+var employee4 = new Employee(4, 'Moitou', 'Medhi', 'Directeur', 200000, new Date('2020-12-28'));
+var employee5 = new Employee(5, 'Outan', 'Laurent', 'Clown', 14000, new Date('2020-12-28'));
+
+console.log(employee1.getMonthlySalary());
+console.log(`--------`);
+employee1.getSeniority();
