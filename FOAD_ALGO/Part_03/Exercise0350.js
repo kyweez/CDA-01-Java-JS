@@ -68,6 +68,10 @@ function palindromeChecker(answer){
     return (true);
 }
 
+/**
+ * This function checks if the value is good, then checks is the value is empty and finally if it's a palindrome
+ * @param {*} answer 
+ */
 function checkInput(answer){
     if (answer.match(regex)){
         if (answer.length == 1)
@@ -104,7 +108,7 @@ function main() {
     console.log(`==========================`);
     
     //Rules
-    console.log(`You have to input a string. There are few rules :`)
+    console.log(`You have to input a string (case insensitive). There are few rules :`)
     console.log(`   - Your input must end by a dot and only one dot`);
     console.log(`   - Your input must start by a letter or a number`);
     console.log(`   - Special chars are forbidden`);
