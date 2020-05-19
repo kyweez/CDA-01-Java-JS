@@ -53,14 +53,38 @@ class Employee {
     }
 
     getSeniority() {
-        let result;
+        let result = "Ancienneté : ";
         // Instantiate date objects to compare them. This avoids working on formatted strings.
         let currentDate = new Date();
         let hireDate = new Date(this.hireDate);
         // We make the difference. The returned value is in milliseconds ...
         let diff = currentDate.getTime() - hireDate.getTime();
-        console.log(diff);
 
+        /**
+         * In a year, there are 31'557'600'000 ms and 365,25 days
+         * In a month, there are 2'629'800'000 ms and 30,4375 days
+         * In a day, there are 86'400'000 ms
+         */
+
+        if (diff < 0) {
+            return (`L'employe(e) ne fait pas encore partie des effectifs`);
+        }
+        else {
+            if (diff > 31557600000) {
+                // We recover the get after the operation, so we have to round down to the inferior integer.
+                result += `${Math.floor(diff / 31557600000)} an(s) `;
+                diff %= 31557600000;
+            }
+            if (diff > 2629800000) {
+                result += `${Math.floor(diff / 2629800000)} mois `;
+                diff %= 2629800000;
+            }
+            if (diff > 86400000) {
+                // There is no operation after, so we have to round normally.
+                result += `${Math.round(diff / 86400000)} jour(s)`;
+            }
+            return (result);
+        }
     }
 }
 
@@ -70,7 +94,7 @@ class Employee {
 
 
 /** @var Employee employee1 */
-var employee1 = new Employee(1, 'Doe', 'John', 'manager', 82000, new Date('2020-12-28')); // création d'un nouvel employé
+var employee1 = new Employee(1, 'Doe', 'John', 'manager', 82000, new Date('2017-12-28')); // création d'un nouvel employé
 
 /** @var array employees */
 const employees = [employee1]; // tableau contenant les employés
@@ -92,4 +116,4 @@ var employee5 = new Employee(5, 'Outan', 'Laurent', 'Clown', 14000, new Date('20
 
 console.log(employee1.getMonthlySalary());
 console.log(`--------`);
-employee1.getSeniority();
+console.log(employee1.getSeniority());
