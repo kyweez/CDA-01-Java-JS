@@ -138,7 +138,7 @@ function tablePrint(employees) {
 tablePrint(employees);
 
 // PRINTING HIGHEST SENIORITY
-function highestSeniority(employees) {
+function highestSeniority() {
     let seniorEmployee = employees[0];
 
     // It's not supposed to happen, but let's check if employees is filled.
@@ -150,11 +150,13 @@ function highestSeniority(employees) {
     }
     console.log(`L'employé ayant le plus d'ancienneté : ${seniorEmployee.firstName} ${seniorEmployee.lastName}`);
 }
-highestSeniority(employees);
+highestSeniority();
 
 // PRINTING WAGES
-const printWage = {
-    highest : () => {
+const printWageInformation = {
+    wageRange : new Array(2),
+
+    highest : (wageRange) => {
         let highestWage = employees[0];
         if (employees.length > 0){
             for (let i = 0; i < employees.length; i++) {
@@ -162,7 +164,9 @@ const printWage = {
                     highestWage = employees[i];
             }
         }
+        wageRange[0] =highestWage;
         console.log(`L'employé avec le plus haut salaire  : ${highestWage.firstName} ${highestWage.lastName}`);
+
     },
 
     lowest : () => {
@@ -173,8 +177,16 @@ const printWage = {
                     lowestWage = employees[i];
             }
         }
+        wageRange[1] =highestWage;
         console.log(`L'employé avec le plus bas salaire   : ${lowestWage.firstName} ${lowestWage.lastName}`);
+    },
+
+    gap : function(wageRange){
+        let wageGap;
+        wageGap = wageRange[0] - wageRange[1];
+        console.log(`La différence de salaire entre le ${wageRange[0]} et le ${wageRange[1]} est de ${wageGap} euros.`);
+
     }
 }
-printWage.highest();
-printWage.lowest();
+printWageInformation.highest();
+printWageInformation.lowest();
