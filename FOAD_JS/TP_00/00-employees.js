@@ -106,14 +106,33 @@ console.log(employees); // export des employés dans la console
 
 // Écrivez votre code à partir de la ligne suivante...
 
+console.log(`\n##########################################################`)
+console.log(`###                 DEBUT DE MA PARTIE                 ###`)
+console.log(`##########################################################\n`)
+
+// OBJECTS INSTANCIATION
 var employee2 = new Employee(2, 'Bon', 'Jean', 'Charcutier', 22000, new Date('2020-06-22'));
 var employee3 = new Employee(3, 'Proviste', 'Alain', 'Formateur', 180000, new Date('2017-03-11'));
 var employee4 = new Employee(4, 'Moitou', 'Medhi', 'Directeur', 200000, new Date('2000-01-01'));
 var employee5 = new Employee(5, 'Outan', 'Laurent', 'Clown', 14000, new Date('1982-11-08'));
 
+// TABLE FILLING
 employees.push(employee2);
 employees.push(employee3);
 employees.push(employee4);
 employees.push(employee5);
-console.log(`###########################################################`)
-console.log(employees);
+
+// PRINTING INFORMATION
+function tablePrint(employees){
+    console.log(`_________________________________________________________________________\n`)
+    for (let i=0; i<employees.length; i++){
+        console.log(`### Employe ${i+1} ###\n`);
+        console.log(`NOM                 : ${employees[i].lastName}`);
+        console.log(`Prenom              : ${employees[i].firstName}`);
+        console.log(`Email               : ${employees[i].email}`);
+        console.log(`Anciennete          : ${employees[i].getSeniority()}`);
+        console.log(`Salaire NET mensuel : ${employees[i].getMonthlySalary()} euros`);
+        console.log(`_________________________________________________________________________\n`)
+    }
+}
+tablePrint(employees);
