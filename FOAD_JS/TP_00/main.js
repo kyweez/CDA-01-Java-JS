@@ -114,7 +114,7 @@ console.log(`##########################################################\n`)
 var employee2 = new Employee(2, 'Bon', 'Jean', 'Charcutier', 22000, new Date('2020-06-22'));
 var employee3 = new Employee(3, 'Proviste', 'Alain', 'Formateur', 180000, new Date('2017-03-11'));
 var employee4 = new Employee(4, 'Moitou', 'Medhi', 'Directeur', 200000, new Date('2000-01-01'));
-var employee5 = new Employee(5, 'Outan', 'Laurent', 'Clown', 14000, new Date('1982-11-08'));
+var employee5 = new Employee(5, 'Outan', 'Laurent', 'Clown', 140000, new Date('1982-11-08'));
 
 // TABLE FILLING
 employees.push(employee2);
@@ -137,8 +137,8 @@ function tablePrint(employees) {
 }
 tablePrint(employees);
 
-// PRINTING HIGHER SENIORITY
-function higherSeniority(employees) {
+// PRINTING HIGHEST SENIORITY
+function highestSeniority(employees) {
     let seniorEmployee = employees[0];
 
     // It's not supposed to happen, but let's check if employees is filled.
@@ -150,4 +150,31 @@ function higherSeniority(employees) {
     }
     console.log(`L'employé ayant le plus d'ancienneté : ${seniorEmployee.firstName} ${seniorEmployee.lastName}`);
 }
-higherSeniority(employees);
+highestSeniority(employees);
+
+// PRINTING WAGES
+const printWage = {
+    highest : () => {
+        let highestWage = employees[0];
+        if (employees.length > 0){
+            for (let i = 0; i < employees.length; i++) {
+                if (employees[i].salary > highestWage.salary)
+                    highestWage = employees[i];
+            }
+        }
+        console.log(`L'employé avec le plus haut salaire  : ${highestWage.firstName} ${highestWage.lastName}`);
+    },
+
+    lowest : () => {
+        let lowestWage = employees[0];
+        if (employees.length > 0){
+            for (let i = 0; i < employees.length; i++) {
+                if (employees[i].salary < lowestWage.salary)
+                    lowestWage = employees[i];
+            }
+        }
+        console.log(`L'employé avec le plus bas salaire   : ${lowestWage.firstName} ${lowestWage.lastName}`);
+    }
+}
+printWage.highest();
+printWage.lowest();
