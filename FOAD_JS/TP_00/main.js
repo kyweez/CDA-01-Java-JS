@@ -123,10 +123,10 @@ employees.push(employee4);
 employees.push(employee5);
 
 // PRINTING INFORMATION
-function tablePrint(employees){
+function tablePrint(employees) {
     console.log(`_________________________________________________________________________\n`)
-    for (let i=0; i<employees.length; i++){
-        console.log(`### Employe ${i+1} ###\n`);
+    for (let i = 0; i < employees.length; i++) {
+        console.log(`### Employe ${i + 1} ###\n`);
         console.log(`NOM                 : ${employees[i].lastName}`);
         console.log(`Prenom              : ${employees[i].firstName}`);
         console.log(`Email               : ${employees[i].email}`);
@@ -136,3 +136,18 @@ function tablePrint(employees){
     }
 }
 tablePrint(employees);
+
+// PRINTING HIGHER SENIORITY
+function higherSeniority(employees) {
+    let seniorEmployee = employees[0];
+
+    // It's not supposed to happen, but let's check if employees is filled.
+    if (employees.length > 0){
+        for (let i = 0; i < employees.length; i++) {
+            if (employees[i].hireDate < seniorEmployee.hireDate)
+                seniorEmployee = employees[i];
+        }
+    }
+    console.log(`L'employé ayant le plus d'ancienneté : ${seniorEmployee.firstName} ${seniorEmployee.lastName}`);
+}
+higherSeniority(employees);
