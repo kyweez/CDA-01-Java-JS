@@ -1,37 +1,4 @@
 /**
- * JAVASCRIPT:  Exercices
- * 
- * Listing d'employés
- * 
- * Consignes : 
- * A l'aide de la syntaxe orientée "classes", modélisez un objet "Employee" possédant les caractéristiques suivantes :
- *  Attributs: 
- *  - id (int): identifiant
- *  - lastname (string): nom
- *  - firstname (string): prénom
- *  - email (string): calculé automatiquement dans le constructeur (exemple: John Doe => jdoe@email.fr)
- *  - role (string): poste occupé
- *  - salary (int): salaire annuel BRUT
- *  - hiredate (Date): date d'embauche au format YYYY-MM-DD
- * 
- *  Méthodes:
- *  - getMonthlySalary() : retourne un entier -> le salaire mensuel NET calculé à partir du salaire annuel (salaire_mensuel = salaire_annuel / 12 * 0.75)
- *  - getSeniority() : renvoie une chaine -> l'ancienneté de l'employé (exemples: "19 jours", "3 mois et 2 jours", "2 ans 7 mois et 8 jours") 
- * 
- * Une fois modélisé et testé, complétez le tableau "employees" pour qu'il contienne 5 employés au total (ni plus, ni moins).
- * Parcourir ensuite le tableau complété et afficher chaque employé dans la console (nom, prénom, email, ancienneté, salaire mensuel NET)
- * Afficher ensuite, individuellement : 
- *  - L'employé ayant le plus d'ancienneté
- *  - L'employé avec le plus haut salaire
- *  - L'employé avec le plus bas salaire
- *  - La différence de salaire entre les 2 précédents 
- * 
- * Documentation Javascript complète: https://developer.mozilla.org/fr/docs/Web/JavaScript
- * Tutoriel Javascript: https://www.pierre-giraud.com/javascript-apprendre-coder-cours/introduction/ 
- */
-
-
-/**
  * This class is madde to instantiate "employee" objects
  * The constructor will format inputs
  * Id         : Given number in ascending order if possible.
@@ -41,7 +8,8 @@
  *              ex: iNpUt becomes Input
  * Role       : Same rules as the firstname
  * Salary     : Integer (annual salary)
- * Hire date  : 
+ * Hire date  : Input is an simplified ISO format (2020-12-30) (I use toISOString method from Date)
+ *              Then i use the substring to take the only characters intersting me
  * 
  * @class Employee
  */
@@ -56,75 +24,73 @@ class Employee {
         this.email = this.firstName.charAt(0).concat(this.lastName, `@email.fr`).toLowerCase();
     }
 
+    /**
+     * This function calcules and returns the monthly net salary
+     * It parse the result to an Integer, it's easier to read
+     * @returns the monthly net wage 
+     */
     getMonthlySalary() {
         return (parseInt(this.salary * 0.75 / 12));
     }
 
+    /**
+     * This method calculs and return a string giving the seniority of an employee
+     * @var result : The returned string
+     * @var currentDate : new Date() without any args returns the current date (ISO format)
+     * @var hireDate : Store the value of the hireDate objects freshly made
+     * @var diff : Difference between the getTime of the 2 dates. getTime returns the time in ms from 1970-1-1
+     * @var year : Number of miliseconds in a year
+     * @var month : Number of miliseconds in a month
+     * @var day : Number of miliseconds in a day
+     */
     getSeniority() {
+        // VARIABLES INSTANTIATION
         let result = "Ancienneté : ";
-        // Instantiate date objects to compare them. This avoids working on formatted strings.
         let currentDate = new Date();
         let hireDate = new Date(this.hireDate);
-        // We make the difference. The returned value is in milliseconds ...
         let diff = currentDate.getTime() - hireDate.getTime();
-
-        /**
-         * In a year, there are 31'557'600'000 ms and 365,25 days
-         * In a month, there are 2'629'800'000 ms and 30,4375 days
-         * In a day, there are 86'400'000 ms
-         */
+        let year = 31557600000;
+        let month = 2629800000;
+        let day = 86400000;
 
         if (diff < 0) {
             return (`L'employe(e) ne fait pas encore partie des effectifs`);
         }
         else {
-            if (diff > 31557600000) {
-                // We recover the get after the operation, so we have to round down to the inferior integer.
-                result += `${Math.floor(diff / 31557600000)} an(s) `;
-                diff %= 31557600000;
+            if (diff > year) {
+                // We have to round down to the inferior integer cuze we get the rest of the division. => floor method
+                result += `${Math.floor(diff / year)} an(s)`;
+                diff %= year;
             }
-            if (diff > 2629800000) {
-                result += `${Math.floor(diff / 2629800000)} mois `;
-                diff %= 2629800000;
+            if (diff > month) {
+                // We have to round down to the inferior integer cuze we get the rest of the division. => floor method
+                result += `${Math.floor(diff / month)} mois `;
+                diff %= month;
             }
-            if (diff > 86400000) {
+            if (diff > day) {
                 // There is no operation after, so we have to round normally.
-                result += `${Math.round(diff / 86400000)} jour(s)`;
+                result += `${Math.round(diff / day)} jour(s)`;
             }
             return (result);
         }
     }
 }
 
-/** DÉBUT ZONE NON EDITABLE (Ne pas modifier les lignes suivantes) */
+console.log(`\n#########################################################`)
+console.log(`###                 EMPLOYEES PROGRAM                 ###`)
+console.log(`#########################################################\n`)
 
-
-/** @var Employee employee1 */
-var employee1 = new Employee(1, 'Doe', 'John', 'manager', 82000, new Date('2020-12-28')); // création d'un nouvel employé
-
-/** @var array employees */
-const employees = [employee1]; // tableau contenant les employés
-
-console.log(employee1); // doit afficher l'objet "employee1"
-console.log("Il y a " + employees.length + " employé(e)s."); // doit afficher "Il y a 5 employé(e)s."
-console.log(employees); // export des employés dans la console
-
-
-/** FIN ZONE NON EDITABLE (Ne pas modifier les lignes précédentes) */
-
-// Écrivez votre code à partir de la ligne suivante...
-
-console.log(`\n##########################################################`)
-console.log(`###                 DEBUT DE MA PARTIE                 ###`)
-console.log(`##########################################################\n`)
-
-// OBJECTS INSTANCIATION
+// OBJECTS INSTANCIATION (creating 5 new employees)
+var employee1 = new Employee(1, 'Doe', 'John', 'manager', 82000, new Date('2020-12-28'));
 var employee2 = new Employee(2, 'Bon', 'Jean', 'Charcutier', 22000, new Date('2020-06-22'));
 var employee3 = new Employee(3, 'Proviste', 'Alain', 'Formateur', 180000, new Date('2017-03-11'));
 var employee4 = new Employee(4, 'Moitou', 'Medhi', 'Directeur', 200000, new Date('2000-01-01'));
 var employee5 = new Employee(5, 'Outan', 'Laurent', 'Clown', 140000, new Date('1982-11-08'));
 
-// TABLE FILLING
+// TABLLE CREATION (This table will contain the 5 five frehly created employees)
+const employees = [employee1];
+
+// TABLE FILLING (I could have create Employee object while crating table, but this way is cleaner)
 employees.push(employee2);
 employees.push(employee3);
 employees.push(employee4);
@@ -143,26 +109,37 @@ function tablePrint(employees) {
         console.log(`_________________________________________________________________________\n`)
     }
 }
-tablePrint(employees);
 
 // PRINTING HIGHEST SENIORITY
+/**
+ * This function prints the name of the older employee (seniority)
+ */
 function highestSeniority() {
     let seniorEmployee = employees[0];
 
-    // It's not supposed to happen, but let's check if employees is filled.
-    if (employees.length > 0) {
-        for (let i = 0; i < employees.length; i++) {
-            if (employees[i].hireDate < seniorEmployee.hireDate)
-                seniorEmployee = employees[i];
-        }
+    for (let i = 0; i < employees.length; i++) {
+        if (employees[i].hireDate < seniorEmployee.hireDate)
+            seniorEmployee = employees[i];
     }
     console.log(`L'employé ayant le plus d'ancienneté dans l'entreprise : ${seniorEmployee.firstName} ${seniorEmployee.lastName}\n`);
 }
-highestSeniority();
 
 // PRINTING WAGES
-const wageInformation = {
-    wage :{
+/**
+ * This litteral object contains 2 litteral objects
+ * // First one
+ * @constant wage : An object containing 3 functions with a return
+ * @function highest : Returns an employee object, the one with the highest salary
+ * @function lowest : Returns an employee object, the one with the lowest salary
+ * @function gap : Returns an integer. Difference between highest wage and lowest wage
+ * // Second one
+ * @constant print : An object containing 4 displaying functions
+ * @function highest : Prints the firstname and the lastname of the richest employee
+ * @function lowest : Prints the firstname and the lastname of the poorest employee
+ * @function gap : Prints the gap between those 2 previous salaries
+ */
+const information = {
+    wage: {
         highest: () => {
             let highestWage = employees[0];
             for (let i = 0; i < employees.length; i++) {
@@ -179,27 +156,52 @@ const wageInformation = {
             }
             return (lowestWage);
         },
-        gap : () => {
-            return (wageInformation.wage.highest().salary - wageInformation.wage.lowest().salary);
+        gap: () => {
+            return (information.wage.highest().salary - information.wage.lowest().salary);
         }
     },
 
     print: {
-        printLowest: () => {
-            console.log(`L'employé avec le plus bas salaire dans l'entreprise   : ${wageInformation.wage.lowest().firstName} ${wageInformation.wage.lowest().lastName}\n`);
+        highest: () => {
+            console.log(`L'employé avec le plus haut salaire dans l'entreprise  : ${information.wage.highest().firstName} ${information.wage.highest().lastName}\n`);
         },
-        printHighest: () => {
-            console.log(`L'employé avec le plus haut salaire dans l'entreprise  : ${wageInformation.wage.highest().firstName} ${wageInformation.wage.highest().lastName}\n`);
+        lowest: () => {
+            console.log(`L'employé avec le plus bas salaire dans l'entreprise   : ${information.wage.lowest().firstName} ${information.wage.lowest().lastName}\n`);
         },
-        printGap: () => {
-            console.log(`Difference entre le plus haut salaire et le plus bas   : ${wageInformation.wage.gap()} euros\n`);
+        gap: () => {
+            console.log(`Difference entre le plus haut salaire et le plus bas   : ${information.wage.gap()} euros\n`);
         },
-        printAll: () => {
-            wageInformation.print.printLowest();
-            wageInformation.print.printHighest();
-            wageInformation.print.printGap();
+        all: () => {
+            information.print.lowest();
+            information.print.highest();
+            information.print.gap();
         }
     }
-
 }
-wageInformation.print.printAll();
+
+// INSTRUCTION 1
+console.log(`\nConsigne numero 1 : Afficher l'objet "employee1`);
+console.log(`-----------------------------------------------`);
+console.log(employee1);
+
+// INSTRUCTION 2
+console.log(`\nConsigne numero 2 : Afficher "Il y a 5 employé(e)s.`);
+console.log(`---------------------------------------------------`);
+console.log("Il y a " + employees.length + " employé(e)s.");
+
+// INSTRUCTION 3
+console.log(`\nConsigne numero 3 : Export des employés dans la console`);
+console.log(`-------------------------------------------------------`);
+console.log(employees);
+
+// INSTRUCTION 4
+console.log(`\nConsigne numero 4 : Parcourir ensuite le tableau et afficher chaque employé`);
+console.log(`                    (nom, prénom, email, ancienneté, salaire mensuel NET)`);
+console.log(`---------------------------------------------------------------------------`);
+tablePrint(employees);
+
+// INSTRUCTION 5
+console.log(`\nConsigne numero 5 : Afficher des informations supplementaires`);
+console.log(`-------------------------------------------------------------`);
+highestSeniority();
+information.print.all();
