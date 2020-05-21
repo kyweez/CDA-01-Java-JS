@@ -31,18 +31,26 @@
  */
 
 
-
-/* COMPLÉTEZ LE PROGRAMME... */
-
 /**
+ * This class is madde to instantiate "employee" objects
+ * The constructor will format inputs
+ * Id         : Given number in ascending order if possible.
+ * Last name  : Format to uppercase.
+ *              ex : input becomes INPUT
+ * Fisrt name : 1st letter capitalized then other letters normal size
+ *              ex: iNpUt becomes Input
+ * Role       : Same rules as the firstname
+ * Salary     : Integer (annual salary)
+ * Hire date  : 
+ * 
  * @class Employee
  */
 class Employee {
     constructor(_id, _lastName, _firstName, _role, _salary, _hireDate) {
         this.id = _id;
-        this.lastName = _lastName.toUpperCase(); // Format to uppercase all the name
-        this.firstName = _firstName.charAt(0).toUpperCase().concat(_firstName.substring(1).toLowerCase()); // Format firstname and role
-        this.role = _role.charAt(0).toUpperCase().concat(_role.substring(1).toLowerCase()); // chaNtaLE becomes Chantale
+        this.lastName = _lastName.toUpperCase();
+        this.firstName = _firstName.charAt(0).toUpperCase().concat(_firstName.substring(1).toLowerCase());
+        this.role = _role.charAt(0).toUpperCase().concat(_role.substring(1).toLowerCase());
         this.salary = _salary;
         this.hireDate = _hireDate.toISOString().substring(0, 10); // ISO string returns something like 2018-07-22T05:22:13.000Z.
         this.email = this.firstName.charAt(0).concat(this.lastName, `@email.fr`).toLowerCase();
@@ -142,51 +150,56 @@ function highestSeniority() {
     let seniorEmployee = employees[0];
 
     // It's not supposed to happen, but let's check if employees is filled.
-    if (employees.length > 0){
+    if (employees.length > 0) {
         for (let i = 0; i < employees.length; i++) {
             if (employees[i].hireDate < seniorEmployee.hireDate)
                 seniorEmployee = employees[i];
         }
     }
-    console.log(`L'employé ayant le plus d'ancienneté : ${seniorEmployee.firstName} ${seniorEmployee.lastName}`);
+    console.log(`L'employé ayant le plus d'ancienneté dans l'entreprise : ${seniorEmployee.firstName} ${seniorEmployee.lastName}\n`);
 }
 highestSeniority();
 
 // PRINTING WAGES
-const printWageInformation = {
-    wageRange : new Array(2),
-
-    highest : (wageRange) => {
-        let highestWage = employees[0];
-        if (employees.length > 0){
+const wageInformation = {
+    wage :{
+        highest: () => {
+            let highestWage = employees[0];
             for (let i = 0; i < employees.length; i++) {
                 if (employees[i].salary > highestWage.salary)
                     highestWage = employees[i];
             }
-        }
-        wageRange[0] =highestWage;
-        console.log(`L'employé avec le plus haut salaire  : ${highestWage.firstName} ${highestWage.lastName}`);
-
-    },
-
-    lowest : () => {
-        let lowestWage = employees[0];
-        if (employees.length > 0){
+            return (highestWage);
+        },
+        lowest: () => {
+            let lowestWage = employees[0];
             for (let i = 0; i < employees.length; i++) {
                 if (employees[i].salary < lowestWage.salary)
                     lowestWage = employees[i];
             }
+            return (lowestWage);
+        },
+        gap : () => {
+            return (wageInformation.wage.highest().salary - wageInformation.wage.lowest().salary);
         }
-        wageRange[1] =highestWage;
-        console.log(`L'employé avec le plus bas salaire   : ${lowestWage.firstName} ${lowestWage.lastName}`);
     },
 
-    gap : function(wageRange){
-        let wageGap;
-        wageGap = wageRange[0] - wageRange[1];
-        console.log(`La différence de salaire entre le ${wageRange[0]} et le ${wageRange[1]} est de ${wageGap} euros.`);
-
+    print: {
+        printLowest: () => {
+            console.log(`L'employé avec le plus bas salaire dans l'entreprise   : ${wageInformation.wage.lowest().firstName} ${wageInformation.wage.lowest().lastName}\n`);
+        },
+        printHighest: () => {
+            console.log(`L'employé avec le plus haut salaire dans l'entreprise  : ${wageInformation.wage.highest().firstName} ${wageInformation.wage.highest().lastName}\n`);
+        },
+        printGap: () => {
+            console.log(`Difference entre le plus haut salaire et le plus bas   : ${wageInformation.wage.gap()} euros\n`);
+        },
+        printAll: () => {
+            wageInformation.print.printLowest();
+            wageInformation.print.printHighest();
+            wageInformation.print.printGap();
+        }
     }
+
 }
-printWageInformation.highest();
-printWageInformation.lowest();
+wageInformation.print.printAll();
