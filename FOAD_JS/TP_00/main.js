@@ -53,24 +53,21 @@ class Employee {
         let month = 2629800000;
         let day = 86400000;
 
-        if (diff < 0) {
+        if (diff < 0)
             return (`L'employe(e) ne fait pas encore partie des effectifs`);
-        }
+        else if (diff % day < 1)
+            return (`L'employe(e) viens de rentrer dans les effectifs`);
         else {
-            if (diff > year) {
-                // We have to round down to the inferior integer cuze we get the rest of the division. => floor method
-                result += `${Math.floor(diff / year)} an(s)`;
-                diff %= year;
-            }
-            if (diff > month) {
-                // We have to round down to the inferior integer cuze we get the rest of the division. => floor method
-                result += `${Math.floor(diff / month)} mois `;
-                diff %= month;
-            }
-            if (diff > day) {
-                // There is no operation after, so we have to round normally.
-                result += `${Math.round(diff / day)} jour(s)`;
-            }
+            // We have to round down to the inferior integer cuze we get the rest of the division. => floor method
+            result += `${Math.floor(diff / year)} an(s), `;
+            diff %= year;
+
+            // We have to round down to the inferior integer cuze we get the rest of the division. => floor method
+            result += `${Math.floor(diff / month)} mois et `;
+            diff %= month;
+
+            // There is no operation after, so we have to round normally.
+            result += `${Math.round(diff / day)} jour(s)`;
             return (result);
         }
     }
@@ -82,7 +79,7 @@ console.log(`#########################################################\n`)
 
 // OBJECTS INSTANCIATION (creating 5 new employees)
 var employee1 = new Employee(1, 'Doe', 'John', 'manager', 82000, new Date('2020-12-28'));
-var employee2 = new Employee(2, 'Bon', 'Jean', 'Charcutier', 22000, new Date('2020-06-22'));
+var employee2 = new Employee(2, 'Bon', 'Jean', 'Charcutier', 22000, new Date('2020-05-22'));
 var employee3 = new Employee(3, 'Proviste', 'Alain', 'Formateur', 180000, new Date('2017-03-11'));
 var employee4 = new Employee(4, 'Moitou', 'Medhi', 'Directeur', 200000, new Date('2000-01-01'));
 var employee5 = new Employee(5, 'Outan', 'Laurent', 'Clown', 140000, new Date('1982-11-08'));
