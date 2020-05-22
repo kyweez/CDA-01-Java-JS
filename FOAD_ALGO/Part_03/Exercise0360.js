@@ -16,43 +16,45 @@ const regexPlayer1 = /^[a-zA-Z]{5,12}$/
 const regexPlayer2 = /^[a-zA-Z]{1}$/
 
 
-function checkInput(answer, isWord) {
-    let wordToFind;
-
+function checkInput(answer, isWord, wordToFind) {
     if (isWord) {
         if (answer.match(regexPlayer1)) {
-            wordToFind = answer.toUpperCase();
+            for (let i=0; i<answer.length; i++){
+                wordToFind[i] = answer.charAt(i);
+            }
             isWord = false;
             dipslayHiddenWord(wordToFind);
-            askInput()
+            askInput(isWord, wordToFind);
         }
         else {
             console.log(`Bad input... Follow the rules !`);
-            askInput(isWord);
+            askInput(isWord, wordToFind);
         }
     }
     else {
         if (answer.match(regexPlayer2)) {
-            console.log(`Ca marche`);
+            console.log(wordToFind);
+            console.log(wordToFind);
         }
         else {
             console.log(`Bad input... Follow the rules !`);
-            askInput(isWord);
+            askInput(isWord, wordToFind);
         }
     }
 }
 
-function askInput(isWord) {
+function askInput(isWord, wordToFind) {
     rl.question(`Please insert a ${(isWord ? `word` : `letter`)} : `, answer => {
-        checkInput(answer, isWord);
+        checkInput(answer, isWord, wordToFind);
     });
 }
 
 function startGame() {
     let isWord; // This boolean is used to check if we want a word or a letter for the checking function
+    const wordToFind = [""];
     console.log(`\nPlayer 1, it's your turn.`);
     isWord = true;
-    askInput(isWord);
+    askInput(isWord, wordToFind);
 }
 
 // #####################################################################
@@ -62,9 +64,9 @@ function startGame() {
 function dipslayHiddenWord(wordToFind) {
     let hiddenWord = wordToFind;
     for (let i = 1; i < hiddenWord.length - 1; i++) {
-        hiddenWord = hiddenWord.replace(hiddenWord.charAt(i), `▪`);
+        hiddenWord[i] = `▪`;
     }
-    console.log(hiddenWord);
+    console.log(hiddenWord.join(``));
 }
 
 function player2Rules(numberOfTry) {
