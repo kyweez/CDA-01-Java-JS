@@ -43,18 +43,22 @@ function checkInput(answer, isWord, wordToFind) {
     }
 }
 
-function askInput(isWord, wordToFind) {
+function askInput(hangman) {
     rl.question(`Please insert a ${(isWord ? `word` : `letter`)} : `, answer => {
-        checkInput(answer, isWord, wordToFind);
+        checkInput(hangman);
     });
 }
 
 function startGame() {
     let isWord; // This boolean is used to check if we want a word or a letter for the checking function
-    const wordToFind = [""];
+    const hangman = {
+        wordToFind : [],
+        hiddenWord : [],
+        isWord : true
+    }
     console.log(`\nPlayer 1, it's your turn.`);
     isWord = true;
-    askInput(isWord, wordToFind);
+    askInput(hangman);
 }
 
 // #####################################################################
