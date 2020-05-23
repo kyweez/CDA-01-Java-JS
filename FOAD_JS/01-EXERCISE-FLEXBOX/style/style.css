@@ -10,7 +10,7 @@ html{
 }
 body{
     width: 100%;
-    background-color: #ECF0F1;
+    background-color: rgb(217, 225, 228);
 }
 
 header{
@@ -35,7 +35,7 @@ main{
     justify-content: center;
 }
 section {
-    background-color: blueviolet;
+    background-color: white;
     height: 74vh;
     width: 38rem;
     margin: 4vh 1.5rem; /* Penser aux media */
@@ -54,7 +54,7 @@ footer{
 footer h3{
     height: 2vh;
     width: 100%;
-    font-size: 2vh;
+    font-size: 1.6vh;
     padding: 2vh 0;
     color: rgb(156, 155, 155);
 }
