@@ -26,7 +26,7 @@ class Hangman {
         // This boolean is used to check if we want a word or a letter for the checking function
         this.isWord = _isWord;
         this.wordToFind = _wordToFind;
-        this.alreadyTried = ["a"];
+        this.alreadyTried = [];
         this.numberOfTry = _numberOfTry;
         this.gameOver = false;
     }
@@ -43,7 +43,7 @@ function insertGoodLetter(answer, hangmanObj) {
 }
 
 function isGoodLetter(answer, hangmanObj) {
-    for (let i = 0; i < hangmanObj.wordToFind.length; i++) {
+    for (let i = 1; i < hangmanObj.wordToFind.length - 1; i++) {
         if (answer.toUpperCase() == hangmanObj.wordToFind[i].toUpperCase())
             return (true);
     }
@@ -81,7 +81,7 @@ function translateToHidden(wordToFind) {
 function stringToTab(answer) {
     let tab = [];
     for (let i = 0; i < answer.length; i++) {
-        tab[i] = answer.charAt(i);
+        tab[i] = answer.charAt(i).toUpperCase();
     }
     return (tab);
 }
@@ -108,9 +108,11 @@ function checkInput(answer, hangmanObj) {
             if (!checkPreviousTry(answer, hangmanObj))
                 askInput(hangmanObj);
             else {
+                hangmanObj.alreadyTried.push(answer);
                 if (isGoodLetter(answer, hangmanObj)) {
                     insertGoodLetter(answer, hangmanObj);
                     if (hangmanObj.gameOver) {
+                        console.log(`\nYou won, GG !!!`);
                         rl.close();
                         process.exit();
                     }
@@ -118,10 +120,20 @@ function checkInput(answer, hangmanObj) {
                         printHiddenWord(hangmanObj);
                         askInput(hangmanObj)
                     }
-
                 }
                 else {
-
+                    console.log(`The letter ${answer.toUpperCase()} is not in the hidden letters`);
+                    hangmanObj.numberOfTry--;
+                    if (hangmanObj.numberOfTry == 0) {
+                        console.log(`\nYou lost, shame on you !`);
+                        console.log(`The word was ${hangmanObj.wordToFind.join("")}`);
+                        rl.close();
+                        process.exit();
+                    }
+                    else {
+                        console.log(`You have ${hangmanObj.numberOfTry} tries left...\n`);
+                        askInput(hangmanObj);
+                    }
                 }
                 askInput(hangmanObj);
             }
