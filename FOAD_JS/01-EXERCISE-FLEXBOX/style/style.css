@@ -1,0 +1,64 @@
+/* ###### GENERAL PROPERTIES ###### */
+*{
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+html{
+    font-family: sans-serif;
+    font-size: 62.5%;
+}
+body{
+    width: 100%;
+    background-color: #ECF0F1;
+}
+
+header{
+    height: 12vh;
+    width: 100%;
+    background-color: #E84C3D;
+
+}
+h1{
+    min-height: 4vh;
+    width: 100%;
+    padding: 4rem 0;
+    color: #FFF;
+    text-align: center;
+    font-size: 3.5vh;
+}
+main{
+    width: 100%;
+    min-height: 82vh;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+section {
+    background-color: blueviolet;
+    height: 74vh;
+    width: 38rem;
+    margin: 4vh 1.5rem; /* Penser aux media */
+}
+.image-display {
+    width: 100%;
+}
+
+/* ###### FOOTER PROPERTIES ###### */
+footer{
+    height: 6vh;
+    width: 100%;
+    background-color: rgb(61, 57, 57);
+    text-align: center;
+}
+footer h3{
+    height: 2vh;
+    width: 100%;
+    font-size: 2vh;
+    padding: 2vh 0;
+    color: rgb(156, 155, 155);
+}
+footer a{
+    text-decoration: none;
+    color: rgb(143, 119, 119);
+}
