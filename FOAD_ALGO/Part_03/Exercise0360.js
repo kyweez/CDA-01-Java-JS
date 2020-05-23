@@ -125,13 +125,15 @@ function checkInput(answer, hangmanObj) {
                     console.log(`The letter ${answer.toUpperCase()} is not in the hidden letters`);
                     hangmanObj.numberOfTry--;
                     if (hangmanObj.numberOfTry == 0) {
-                        console.log(`\nYou lost, shame on you !`);
+                        displayHangman(hangmanObj);
+                        console.log(`\x1b[1m\nYou lost, shame on you !\x1b[0m`);
                         console.log(`The word was ${hangmanObj.wordToFind.join("")}`);
                         rl.close();
                         process.exit();
                     }
                     else {
                         console.log(`You have ${hangmanObj.numberOfTry} tries left...\n`);
+                        displayHangman(hangmanObj);
                         askInput(hangmanObj);
                     }
                 }
@@ -145,7 +147,7 @@ function checkInput(answer, hangmanObj) {
     }
 }
 function askInput(hangmanObj) {
-    rl.question(`Please insert a ${(hangmanObj.isWord ? `word` : `letter`)} : `, answer => {
+    rl.question(`\x1b[35mPlease insert a ${(hangmanObj.isWord ? `word` : `letter`)} : \x1b[0m`, answer => {
         checkInput(answer, hangmanObj);
     });
 }
@@ -231,3 +233,77 @@ function main() {
 }
 
 main();
+
+// #################################################################
+// ######################## HANGMAN DISPLAY ########################
+// #################################################################
+
+function displayHangman(hangmanObj){
+
+    if (hangmanObj.numberOfTry == 5){
+        console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(`█████████████████\n`)
+    }
+    else if (hangmanObj.numberOfTry == 4){
+        console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
+        console.log(` ▐  \x1b[1m/     |\x1b[0m`);
+        console.log(` ▐ \x1b[1m/      |\x1b[0m`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(`█████████████████\n`)
+    }
+    else if (hangmanObj.numberOfTry == 3){
+        console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
+        console.log(` ▐  \x1b[1m/     |\x1b[0m`);
+        console.log(` ▐ \x1b[1m/      |\x1b[0m`);
+        console.log(` ▐        \x1b[1mỌ\x1b[0m`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(`█████████████████\n`)
+    }
+    else if (hangmanObj.numberOfTry == 2){
+        console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
+        console.log(` ▐  \x1b[1m/     |\x1b[0m`);
+        console.log(` ▐ \x1b[1m/      |\x1b[0m`);
+        console.log(` ▐        \x1b[1mỌ\x1b[0m`);
+        console.log(` ▐       \x1b[1m/|\\\x1b[0m`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(`█████████████████\n`)
+    }
+    else if (hangmanObj.numberOfTry == 1){
+        console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
+        console.log(` ▐  \x1b[1m/     |\x1b[0m`);
+        console.log(` ▐ \x1b[1m/      |\x1b[0m`);
+        console.log(` ▐        \x1b[1mỌ\x1b[0m`);
+        console.log(` ▐       \x1b[1m/|\\\x1b[0m`);
+        console.log(` ▐        \x1b[1m|\x1b[0m`);
+        console.log(` ▐`);
+        console.log(` ▐`);
+        console.log(`█████████████████\n`)
+    }
+    else {
+        console.log(` \x1b[31m\n▄▄▄▄▄▄▄▄▄▄▄▄`)
+        console.log(` ▐  \x1b[1m/     |`);
+        console.log(` ▐ \x1b[1m/      |`);
+        console.log(` ▐        \x1b[1mỌ`);
+        console.log(` ▐       \x1b[1m/|\\`);
+        console.log(` ▐        \x1b[1m|`);
+        console.log(` ▐       \x1b[1m/ \\`);
+        console.log(` ▐`);
+        console.log(`█████████████████\n`)
+    }
+}
