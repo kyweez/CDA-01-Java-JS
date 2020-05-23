@@ -13,20 +13,23 @@ body{
     background-color: rgb(217, 225, 228);
 }
 
+/* ###### HEADER PROPERTIES ###### */
 header{
-    height: 12vh;
+    min-height: 12vh;
     width: 100%;
     background-color: #E84C3D;
+    display: flex;
+    align-items: center;
 
 }
 h1{
-    min-height: 4vh;
     width: 100%;
-    padding: 4rem 0;
     color: #FFF;
     text-align: center;
-    font-size: 3.5vh;
+    font-size: 3.5rem;
 }
+
+/* ###### MAIN PROPERTIES ###### */
 main{
     width: 100%;
     min-height: 82vh;
@@ -36,29 +39,134 @@ main{
 }
 section {
     background-color: white;
-    height: 74vh;
+    min-height: 74vh;
     width: 38rem;
-    margin: 4vh 1.5rem; /* Penser aux media */
+    margin: 4vh 1.5rem;
 }
 .image-display {
     width: 100%;
 }
-
+.title-display{
+    font-size: 3rem;
+    padding: 1.5rem 2rem;
+    color: #E84C3D;
+}
+.paragraph-display{
+    color: rgb(39, 38, 38);
+    padding: 0 3rem 3rem 2rem;
+    font-size: 1.7rem;
+}
 /* ###### FOOTER PROPERTIES ###### */
 footer{
     height: 6vh;
     width: 100%;
     background-color: rgb(61, 57, 57);
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 footer h3{
-    height: 2vh;
-    width: 100%;
-    font-size: 1.6vh;
+    font-size: 1.6rem;
     padding: 2vh 0;
     color: rgb(156, 155, 155);
 }
 footer a{
     text-decoration: none;
     color: rgb(143, 119, 119);
+}
+
+/* ###### MEDIA QUERIES ###### */
+@media screen and (max-width: 1250px) {
+    #flexbox{
+        margin: 4vh 1.5rem 2vh 3rem;
+    }
+    #grid{
+        margin: 4vh 3rem 2vh 1.5rem;
+    }
+    #display{
+        margin: 2vh 3rem 4vh 3rem;
+    }
+}
+@media screen and (max-width: 850px) {
+    #flexbox{
+        margin: 4vh 3rem 2vh 3rem;
+    }
+    #grid{
+        margin: 2vh 3rem 2vh 3rem;
+    }
+    #display{
+        margin: 2vh 3rem 4vh 3rem;
+    }
+}
+@media screen and (max-width: 440px) {
+    .title-display{
+        padding: 1.5rem 2rem;
+        font-size: 2.5rem;
+    }
+    .paragraph-display {
+        font-size: 1.6rem;
+    }
+}
+@media screen and (max-width: 400px) {
+    /* Deleting the old title to replace by 2 blocks*/
+    h1{
+        font-size: 0;
+    }
+    h1::before {
+        display: block;
+        content : "Flexbox";
+        font-size : 3.5rem;
+    }
+    h1::after{
+        display: block;
+        content : "Card Layout";
+        font-size : 3.5rem;
+    }
+}
+@media screen and (max-width: 360px) {
+    h1{
+        font-size: 0;
+    }
+    h1::before {
+        display: block;
+        content : "Flexbox";
+        font-size : 2.5rem;
+    }
+    h1::after{
+        display: block;
+        content : "Card Layout";
+        font-size : 2.5rem;
+    }
+    .title-display{
+        padding: 1rem 2rem;
+        font-size: 2.2rem;
+    }
+    .paragraph-display {
+        font-size: 1.4rem;
+    }
+    footer h3{
+        font-size: 1.4rem;
+    }
+}
+@media screen and (max-width: 310px) {
+    #flexbox{
+        margin: 2vh 1rem 1vh 1rem;
+    }
+    #grid{
+        margin: 1vh 1rem 1vh 1rem;
+    }
+    #display{
+        margin: 1vh 1rem 2vh 1rem;
+    }
+    .title-display{
+        padding: 0.5rem 1rem;
+        font-size: 2.2rem;
+    }
+    .paragraph-display {
+        font-size: 1.3rem;
+        padding: 0 1rem;
+    }
+    footer h3{
+        font-size: 1.2rem;
+    }
 }
