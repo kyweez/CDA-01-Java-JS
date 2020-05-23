@@ -28,26 +28,25 @@ class Hangman {
         this.wordToFind = _wordToFind;
         this.alreadyTried = ["a"];
     }
-
-    printHiddenWord() {
-        console.log(this.hiddenWord.join(``));
-    }
-
-    printWordToFind() {
-        console.log(this.wordToFind.join(``));
-    }
 }
 
 function checkPreviousTry(answer, hangmanObj) {
-    console.log("TEST 1");
     for (let i = 0; i < hangmanObj.alreadyTried.length; i++) {
-        console.log("TEST 2");
-        if (answer.toUpperCase == hangmanObj.alreadyTried[i].toUpperCase){
-            console.log("TEST 3");
+        if (answer.toUpperCase() == hangmanObj.alreadyTried[i].toUpperCase()){
+            console.log("You already tried this letter, early Alzheimer ?\n")
             return (false);
         }
     }
-    console.log("TEST 4");
+    return (true);
+}
+
+function checkNotWritten(answer, hangmanObj) {
+    for (let i = 0; i < hangmanObj.hiddenWord.length; i++) {
+        if (answer.toUpperCase() == hangmanObj.hiddenWord[i].toUpperCase()){
+            console.log(`This letter is already written. Come on, how can you be so dumb ?\n`)
+            return (false);
+        }
+    }
     return (true);
 }
 
@@ -85,7 +84,8 @@ function checkInput(answer, hangmanObj) {
             hangmanObj.isWord = false;
             hangmanObj.hiddenWord = translateToHidden(stringToTab(answer));
             // Starting player 2 turn
-            console.log(`\nPlayer 2, it's your turn.`);
+            console.log(`\n\x1b[44mPlayer 2, it's your turn.\n\x1b[0m`);
+            printHiddenWord(hangmanObj);
             askInput(hangmanObj);
         }
         else {
@@ -95,12 +95,14 @@ function checkInput(answer, hangmanObj) {
     }
     else {
         if (answer.match(regexPlayer2)) {
-            if (checkPreviousTry(answer, hangmanObj)){
-
+            if (!checkNotWritten(answer, hangmanObj)){
+                askInput(hangmanObj);
+            }
+            else if (!checkPreviousTry(answer, hangmanObj)){
+                askInput(hangmanObj);
             }
             else{
-                console.log("You already tried this letter, COME ON !!! ")
-                askInput(hangmanObj);
+
             }
         }
         else {
@@ -116,7 +118,7 @@ function askInput(hangmanObj) {
 }
 
 function startGame(hangmanObj) {
-    console.log(`\nPlayer 1, it's your turn.`);
+    console.log(`\n\x1b[41mPlayer 1, it's your turn.\n\x1b[0m`);
     askInput(hangmanObj);
 }
 
@@ -124,22 +126,32 @@ function startGame(hangmanObj) {
 // ######################### DISPLAY FUNCTIONS #########################
 // #####################################################################
 
+
+//A LA BASE LA FONCTION SE TROUVAIT DANS LA CLASSE MAIS BUG UNDEFINED...
+function printHiddenWord(hangmanObj) {
+    console.log(`${hangmanObj.hiddenWord.join("")}\n`);
+}
+
+function printWordToFind(hangmanObj) {
+    console.log(`${hangmanObj.wordToFind.join("")}\n`);
+}
+
 function player2Rules(numberOfTry) {
     console.log(`___________________________________________________`)
-    console.log(`\nPlayer 2\n`)
+    console.log(`\n\x1B[31m\x1b[31mPlayer 2\x1b[32m\n`)
     console.log(`1. Give a letter you dind't use before`);
     console.log(`2. Do not use special characters, numbers or spaces`);
     console.log(`3. Word is case insensitive`);
-    console.log(`4. You have ${numberOfTry} tries left`);
+    console.log(`4. You have ${numberOfTry} tries left\x1B[0m`);
 }
 
 function player1Rules() {
     console.log(`___________________________________________________`)
-    console.log(`\nPlayer 1\n`)
+    console.log(`\n\x1B[31mPlayer 1\x1b[32m\n`)
     console.log(`1. Insert a word between 5 and 12 chararcters`);
     console.log(`2. Do not use special characters, numbers or spaces`);
     console.log(`3. Word is case insensitive`);
-    console.log(`4. Insert a real word...`);
+    console.log(`4. Insert a real word...\x1B[0m`);
 }
 
 function displayRules() {

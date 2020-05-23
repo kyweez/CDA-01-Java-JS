@@ -16,15 +16,16 @@ const regexPlayer1 = /^[a-zA-Z]{5,12}$/
 const regexPlayer2 = /^[a-zA-Z]{1}$/
 
 
-function checkInput(answer, isWord, wordToFind) {
-    if (isWord) {
+function checkInput(answer, hangman) {
+    console.log(hangman);
+    if (hangman.isWord) {
         if (answer.match(regexPlayer1)) {
             for (let i=0; i<answer.length; i++){
-                wordToFind[i] = answer.charAt(i);
+                hangman.wordToFind[i] = answer.charAt(i);
             }
-            isWord = false;
-            dipslayHiddenWord(wordToFind);
-            askInput(isWord, wordToFind);
+            hangman.isWord = false;
+            dipslayHiddenWord(hangman.wordToFind);
+            askInput(hangman);
         }
         else {
             console.log(`Bad input... Follow the rules !`);
@@ -44,7 +45,7 @@ function checkInput(answer, isWord, wordToFind) {
 }
 
 function askInput(hangman) {
-    rl.question(`Please insert a ${(isWord ? `word` : `letter`)} : `, answer => {
+    rl.question(`Please insert a ${(hangman.isWord ? `word` : `letter`)} : `, answer => {
         checkInput(hangman);
     });
 }
@@ -57,7 +58,6 @@ function startGame() {
         isWord : true
     }
     console.log(`\nPlayer 1, it's your turn.`);
-    isWord = true;
     askInput(hangman);
 }
 
@@ -65,10 +65,10 @@ function startGame() {
 // ######################### DISPLAY FUNCTIONS #########################
 // #####################################################################
 
-function dipslayHiddenWord(wordToFind) {
-    let hiddenWord = wordToFind;
+function dipslayHiddenWord(hangman) {
+    hangman.hiddenWord = hangman.wordToFind;
     for (let i = 1; i < hiddenWord.length - 1; i++) {
-        hiddenWord[i] = `▪`;
+        hangman.hiddenWord[i] = `▪`;
     }
     console.log(hiddenWord.join(``));
 }
