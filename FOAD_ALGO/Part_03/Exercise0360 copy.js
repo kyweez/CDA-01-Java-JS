@@ -22,28 +22,38 @@ const regexPlayer2 = /^[a-zA-Z]{1}$/
 // #####################################################################
 
 class Hangman {
-    constructor(_isWord, _wordToFind) {
+    constructor(_isWord, _wordToFind, _numberOfTry) {
         // This boolean is used to check if we want a word or a letter for the checking function
         this.isWord = _isWord;
         this.wordToFind = _wordToFind;
         this.alreadyTried = ["a"];
+        this.numberOfTry = _numberOfTry;
+        this.gameOver = false;
     }
+}
+
+function insertGoodLetter(answer, hangmanObj) {
+    hangmanObj.gameOver = true;
+    for (let i = 0; i < hangmanObj.wordToFind.length; i++) {
+        if (answer.toUpperCase() == hangmanObj.wordToFind[i].toUpperCase())
+            hangmanObj.hiddenWord[i] = answer.toUpperCase();
+        if (hangmanObj.hiddenWord[i].toUpperCase() != hangmanObj.wordToFind[i].toUpperCase())
+            hangmanObj.gameOver = false;
+    }
+}
+
+function isGoodLetter(answer, hangmanObj) {
+    for (let i = 0; i < hangmanObj.wordToFind.length; i++) {
+        if (answer.toUpperCase() == hangmanObj.wordToFind[i].toUpperCase())
+            return (true);
+    }
+    return (false);
 }
 
 function checkPreviousTry(answer, hangmanObj) {
     for (let i = 0; i < hangmanObj.alreadyTried.length; i++) {
-        if (answer.toUpperCase() == hangmanObj.alreadyTried[i].toUpperCase()){
+        if (answer.toUpperCase() == hangmanObj.alreadyTried[i].toUpperCase()) {
             console.log("You already tried this letter, early Alzheimer ?\n")
-            return (false);
-        }
-    }
-    return (true);
-}
-
-function checkNotWritten(answer, hangmanObj) {
-    for (let i = 0; i < hangmanObj.hiddenWord.length; i++) {
-        if (answer.toUpperCase() == hangmanObj.hiddenWord[i].toUpperCase()){
-            console.log(`This letter is already written. Come on, how can you be so dumb ?\n`)
             return (false);
         }
     }
@@ -95,14 +105,25 @@ function checkInput(answer, hangmanObj) {
     }
     else {
         if (answer.match(regexPlayer2)) {
-            if (!checkNotWritten(answer, hangmanObj)){
+            if (!checkPreviousTry(answer, hangmanObj))
                 askInput(hangmanObj);
-            }
-            else if (!checkPreviousTry(answer, hangmanObj)){
-                askInput(hangmanObj);
-            }
-            else{
+            else {
+                if (isGoodLetter(answer, hangmanObj)) {
+                    insertGoodLetter(answer, hangmanObj);
+                    if (hangmanObj.gameOver) {
+                        rl.close();
+                        process.exit();
+                    }
+                    else {
+                        printHiddenWord(hangmanObj);
+                        askInput(hangmanObj)
+                    }
 
+                }
+                else {
+
+                }
+                askInput(hangmanObj);
             }
         }
         else {
@@ -191,7 +212,7 @@ function displayTitle(title) {
 // #################################################################
 
 function main() {
-    const hangmanObj = new Hangman(true, [])
+    const hangmanObj = new Hangman(true, [], 6)
     displayTitle(`The hangman game program`);
     displayRules();
     startGame(hangmanObj);
