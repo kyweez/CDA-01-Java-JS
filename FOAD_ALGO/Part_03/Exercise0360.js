@@ -32,6 +32,17 @@ class Hangman {
     }
 }
 
+// #####################################################################
+// ############################# FUNCTIONS #############################
+// #####################################################################
+
+/**
+ * This function tells to the player 2 he failed finding a correct letter.
+ * If the number of tries equals 0, the game is over
+ * Else, the player 2 can try a new letter
+ * @param {*} answer 
+ * @param {*} hangmanObj 
+ */
 function failTry(answer, hangmanObj) {
     console.log(`The letter ${answer.toUpperCase()} is not in the hidden letters`);
     hangmanObj.numberOfTry--;
@@ -49,6 +60,13 @@ function failTry(answer, hangmanObj) {
     }
 }
 
+/**
+ * This function tells to the player 2 he found a good letter.
+ * Then it inserts the letter in the hidden word.
+ * If the full word is found, the game is over.
+ * @param {*} answer 
+ * @param {*} hangmanObj 
+ */
 function succeedTry(answer, hangmanObj) {
     insertGoodLetter(answer, hangmanObj);
     if (hangmanObj.gameOver) {
@@ -62,6 +80,12 @@ function succeedTry(answer, hangmanObj) {
     }
 }
 
+/**
+ * This function inserts the good letter in the hiddenWord.
+ * It also tests if there is still hidden char (boolean)
+ * @param {*} answer 
+ * @param {*} hangmanObj 
+ */
 function insertGoodLetter(answer, hangmanObj) {
     hangmanObj.gameOver = true;
     for (let i = 0; i < hangmanObj.wordToFind.length; i++) {
@@ -72,6 +96,12 @@ function insertGoodLetter(answer, hangmanObj) {
     }
 }
 
+/**
+ * This function checks if the input letter is in the word to find.
+ * @param {*} answer 
+ * @param {*} hangmanObj
+ * @returns true or false
+ */
 function isGoodLetter(answer, hangmanObj) {
     for (let i = 1; i < hangmanObj.wordToFind.length - 1; i++) {
         if (answer.toUpperCase() == hangmanObj.wordToFind[i].toUpperCase())
@@ -80,6 +110,12 @@ function isGoodLetter(answer, hangmanObj) {
     return (false);
 }
 
+/**
+ * This function checks if the letter has already been tried.
+ * @param {*} answer 
+ * @param {*} hangmanObj
+ * @returns true or false
+ */
 function checkPreviousTry(answer, hangmanObj) {
     for (let i = 0; i < hangmanObj.alreadyTried.length; i++) {
         if (answer.toUpperCase() == hangmanObj.alreadyTried[i].toUpperCase()) {
@@ -116,6 +152,10 @@ function stringToTab(answer) {
     return (tab);
 }
 
+/**
+ * This function lauches the player 2 game.
+ * @param {*} hangmanObj 
+ */
 function startPlayerTwo(hangmanObj) {
     // Starting player 2 turn
     console.log(`\n\x1b[44mPlayer 2, it's your turn.\n\x1b[0m`);
@@ -123,6 +163,11 @@ function startPlayerTwo(hangmanObj) {
     askInput(hangmanObj);
 }
 
+/**
+ * This fucntion sets differents attribute of the hangman object
+ * @param {*} answer 
+ * @param {*} hangmanObj 
+ */
 function setAttributes(answer, hangmanObj) {
     // Set the hangmanObj attributes
     hangmanObj.wordToFind = stringToTab(answer);
@@ -130,6 +175,13 @@ function setAttributes(answer, hangmanObj) {
     hangmanObj.hiddenWord = translateToHidden(stringToTab(answer));
 }
 
+/**
+ * This function checks if the input is correct.
+ * It can check both word (player 1) or letter (player 2) depending of boolean value of isWord.
+ * It executes actions depending of the checking result
+ * @param {*} answer 
+ * @param {*} hangmanObj 
+ */
 function checkInput(answer, hangmanObj) {
     if (hangmanObj.isWord) {
         if (answer.match(regexPlayer1)) {
@@ -160,12 +212,21 @@ function checkInput(answer, hangmanObj) {
         }
     }
 }
+
+/**
+ * Asks the user to prompt. The display is adaptative to the boolean value isWord
+ * @param {*} hangmanObj 
+ */
 function askInput(hangmanObj) {
     rl.question(`\x1b[35mPlease insert a ${(hangmanObj.isWord ? `word` : `letter`)} : \x1b[0m`, answer => {
         checkInput(answer, hangmanObj);
     });
 }
 
+/**
+ * This function launch the player 1 game.
+ * @param {*} hangmanObj 
+ */
 function startGame(hangmanObj) {
     console.log(`\n\x1b[41mPlayer 1, it's your turn.\n\x1b[0m`);
     askInput(hangmanObj);
@@ -176,7 +237,10 @@ function startGame(hangmanObj) {
 // #####################################################################
 
 
-//A LA BASE LA FONCTION SE TROUVAIT DANS LA CLASSE MAIS BUG UNDEFINED...
+/**
+ * At start, I put it in the class, however it brought some weird behaviors
+ * @param {*} hangmanObj 
+ */
 function printHiddenWord(hangmanObj) {
     console.log(`${hangmanObj.hiddenWord.join("")}\n`);
 }
