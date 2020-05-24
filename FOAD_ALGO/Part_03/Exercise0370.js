@@ -16,17 +16,19 @@ function merge(firstTable, secondTable) {
     let i = 0;
     let j = 0;
     while (i < firstTable.length && j < secondTable.length) {
-        if (firstTable[i] < secondTable[i])
+        if (firstTable[i] < secondTable[j]) {
             sortedTable.push(firstTable[i++]);
-        else
+        }
+        else {
             sortedTable.push(secondTable[j++]);
+        }
     }
     // At this point either firstTable or second table has been browsed
     while (i < firstTable.length) {
         sortedTable.push(firstTable[i++]);
     }
     while (j < secondTable.length) {
-        sortedTable.push(firstTable[i++]);
+        sortedTable.push(secondTable[j++]);
     }
     return (sortedTable);
 }
@@ -53,9 +55,9 @@ function main() {
     // const tableTxt = stringTxt.toString().split("\r\n"); 
     // console.log(tableTxt);
     // const sortedTable = sortTable(tableTxt);
-    let tab = [5, 1, 9, 2];
+    let tab = [1,2,0,0,3,2,3,1,2,3,1,2,312,3,1,2,31,5,63,2,64,5,6,8,4,3,6,23,4,52,3,67,2,3,4,5,2,35,4,1,2,35,2,465,2];
     console.log(tab.join(" "));
-    console.log(mergeSort(tab));
+    console.log(mergeSort(tab).join(" "));
     process.exit(0);
     // console.log(fusionSort(tab));
 }
