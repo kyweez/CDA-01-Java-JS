@@ -32,6 +32,36 @@ class Hangman {
     }
 }
 
+function failTry(answer, hangmanObj) {
+    console.log(`The letter ${answer.toUpperCase()} is not in the hidden letters`);
+    hangmanObj.numberOfTry--;
+    if (hangmanObj.numberOfTry == 0) {
+        displayHangman(hangmanObj);
+        console.log(`\x1b[1mYou lost, shame on you !\n\x1b[0m`);
+        console.log(`The word was ${hangmanObj.wordToFind.join("")}\n`);
+        rl.close();
+        process.exit();
+    }
+    else {
+        displayHangman(hangmanObj);
+        console.log(`You have ${hangmanObj.numberOfTry} tries left...\n`);
+        askInput(hangmanObj);
+    }
+}
+
+function succeedTry(answer, hangmanObj) {
+    insertGoodLetter(answer, hangmanObj);
+    if (hangmanObj.gameOver) {
+        console.log(`\nYou won, GG !!!`);
+        rl.close();
+        process.exit();
+    }
+    else {
+        printHiddenWord(hangmanObj);
+        askInput(hangmanObj)
+    }
+}
+
 function insertGoodLetter(answer, hangmanObj) {
     hangmanObj.gameOver = true;
     for (let i = 0; i < hangmanObj.wordToFind.length; i++) {
@@ -86,17 +116,25 @@ function stringToTab(answer) {
     return (tab);
 }
 
+function startPlayerTwo(hangmanObj) {
+    // Starting player 2 turn
+    console.log(`\n\x1b[44mPlayer 2, it's your turn.\n\x1b[0m`);
+    printHiddenWord(hangmanObj);
+    askInput(hangmanObj);
+}
+
+function setAttributes(answer, hangmanObj) {
+    // Set the hangmanObj attributes
+    hangmanObj.wordToFind = stringToTab(answer);
+    hangmanObj.isWord = false;
+    hangmanObj.hiddenWord = translateToHidden(stringToTab(answer));
+}
+
 function checkInput(answer, hangmanObj) {
     if (hangmanObj.isWord) {
         if (answer.match(regexPlayer1)) {
-            // Set the hangmanObj attributes
-            hangmanObj.wordToFind = stringToTab(answer);
-            hangmanObj.isWord = false;
-            hangmanObj.hiddenWord = translateToHidden(stringToTab(answer));
-            // Starting player 2 turn
-            console.log(`\n\x1b[44mPlayer 2, it's your turn.\n\x1b[0m`);
-            printHiddenWord(hangmanObj);
-            askInput(hangmanObj);
+            setAttributes(answer, hangmanObj);
+            startPlayerTwo(hangmanObj);
         }
         else {
             console.log(`Bad input... Follow the rules !\n`);
@@ -109,34 +147,10 @@ function checkInput(answer, hangmanObj) {
                 askInput(hangmanObj);
             else {
                 hangmanObj.alreadyTried.push(answer);
-                if (isGoodLetter(answer, hangmanObj)) {
-                    insertGoodLetter(answer, hangmanObj);
-                    if (hangmanObj.gameOver) {
-                        console.log(`\nYou won, GG !!!`);
-                        rl.close();
-                        process.exit();
-                    }
-                    else {
-                        printHiddenWord(hangmanObj);
-                        askInput(hangmanObj)
-                    }
-                }
-                else {
-                    console.log(`The letter ${answer.toUpperCase()} is not in the hidden letters`);
-                    hangmanObj.numberOfTry--;
-                    if (hangmanObj.numberOfTry == 0) {
-                        displayHangman(hangmanObj);
-                        console.log(`\x1b[1m\nYou lost, shame on you !\x1b[0m`);
-                        console.log(`The word was ${hangmanObj.wordToFind.join("")}`);
-                        rl.close();
-                        process.exit();
-                    }
-                    else {
-                        console.log(`You have ${hangmanObj.numberOfTry} tries left...\n`);
-                        displayHangman(hangmanObj);
-                        askInput(hangmanObj);
-                    }
-                }
+                if (isGoodLetter(answer, hangmanObj))
+                    succeedTry(answer, hangmanObj);
+                else
+                    failTry(answer, hangmanObj);
                 askInput(hangmanObj);
             }
         }
@@ -165,10 +179,6 @@ function startGame(hangmanObj) {
 //A LA BASE LA FONCTION SE TROUVAIT DANS LA CLASSE MAIS BUG UNDEFINED...
 function printHiddenWord(hangmanObj) {
     console.log(`${hangmanObj.hiddenWord.join("")}\n`);
-}
-
-function printWordToFind(hangmanObj) {
-    console.log(`${hangmanObj.wordToFind.join("")}\n`);
 }
 
 function player2Rules(numberOfTry) {
@@ -238,9 +248,9 @@ main();
 // ######################## HANGMAN DISPLAY ########################
 // #################################################################
 
-function displayHangman(hangmanObj){
+function displayHangman(hangmanObj) {
 
-    if (hangmanObj.numberOfTry == 5){
+    if (hangmanObj.numberOfTry == 5) {
         console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
         console.log(` ▐`);
         console.log(` ▐`);
@@ -251,7 +261,7 @@ function displayHangman(hangmanObj){
         console.log(` ▐`);
         console.log(`█████████████████\n`)
     }
-    else if (hangmanObj.numberOfTry == 4){
+    else if (hangmanObj.numberOfTry == 4) {
         console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
         console.log(` ▐  \x1b[1m/     |\x1b[0m`);
         console.log(` ▐ \x1b[1m/      |\x1b[0m`);
@@ -262,7 +272,7 @@ function displayHangman(hangmanObj){
         console.log(` ▐`);
         console.log(`█████████████████\n`)
     }
-    else if (hangmanObj.numberOfTry == 3){
+    else if (hangmanObj.numberOfTry == 3) {
         console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
         console.log(` ▐  \x1b[1m/     |\x1b[0m`);
         console.log(` ▐ \x1b[1m/      |\x1b[0m`);
@@ -273,7 +283,7 @@ function displayHangman(hangmanObj){
         console.log(` ▐`);
         console.log(`█████████████████\n`)
     }
-    else if (hangmanObj.numberOfTry == 2){
+    else if (hangmanObj.numberOfTry == 2) {
         console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
         console.log(` ▐  \x1b[1m/     |\x1b[0m`);
         console.log(` ▐ \x1b[1m/      |\x1b[0m`);
@@ -284,7 +294,7 @@ function displayHangman(hangmanObj){
         console.log(` ▐`);
         console.log(`█████████████████\n`)
     }
-    else if (hangmanObj.numberOfTry == 1){
+    else if (hangmanObj.numberOfTry == 1) {
         console.log(` \n▄▄▄▄▄▄▄▄▄▄▄▄`)
         console.log(` ▐  \x1b[1m/     |\x1b[0m`);
         console.log(` ▐ \x1b[1m/      |\x1b[0m`);
