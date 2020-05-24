@@ -9,14 +9,27 @@ const controlRegex = /^[a-zA-Z]+$/
 
 const fs = require(`fs`);
 
-function
+
+function binarySearch(table, answer, minBound, maxBound) {
+    let mid = Math.floor((maxBound + minBound) / 2);
+
+    // Protect the case of an empty table (maxBound = -1)
+    if (minBound > maxBound)
+        return (-1);
+    if (answer.toUpperCase() == table[mid].toUpperCase())
+        return (mid);
+    else if (answer.toUpperCase() < table[mid].toUpperCase())
+        return (binarySearch(table, answer, minBound, mid - 1));
+    else
+        return (binarySearch(table, answer, mid + 1, maxBound));
+}
 
 //
-function checkInput(answer, sortedTable){
-    if (answer.match(controlRegex)){
+function checkInput(answer, sortedTable) {
+    if (answer.match(controlRegex)) {
         return (true);
     }
-    else{
+    else {
         console.log(`Bad input... Insert a firstname (letters only)`)
         return (false);
     }
@@ -28,12 +41,20 @@ function checkInput(answer, sortedTable){
  */
 function startGame(sortedTable) {
     rl.question(`Please input a firstname : `, answer => {
-        if (checkInput(answer, sortedTable)){
-            let result = binarySearch 
+        if (checkInput(answer, sortedTable)) {
+            let minBound = 0;
+            let maxBound = sortedTable.length - 1;
+            let indexResult = binarySearch(sortedTable, answer, minBound, maxBound);
+            if (indexResult < 0)
+                console.log(`${answer} isn't in this list`);
+            else
+                console.log(`${answer} is at the index ${indexResult}`);
+            rl.close();
+            process.exit();
         }
-        else{
+        else {
             console.log(`Bad input`);
-            startGame(sortedTable);
+            startGame(sortedTable, answer);
         }
     })
 }
