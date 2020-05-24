@@ -1,19 +1,34 @@
+/**
+ * Search by dichotomy of an element in an ordered table
+ * Given a table containing firstnames, sorted alphabetically
+ * We want to find the index of the cell in the table where the firstname is located, if it is there.
+ * Give the algorithm of the procedure which searches, by dichotomy, the number of the first name.
+ */
+
+const fs = require(`fs`);
 const readline = require(`readline`);
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-
-// This regex checks if the player 1 inserted a valid word
+// This regex checks if the input is correct
 const controlRegex = /^[a-zA-Z]+$/
 
-const fs = require(`fs`);
-
-
+/**
+ * This recursive function cuts the table in 2 section.
+ * Since its an ordered table, we can check if answer is greater or lower than the mid value.
+ * Until we find a result (valid or not), we continue to divide the table by 2.
+ * Since we overwrtite max or min bound by (mid+1) or (mid-1) the recursion must stop at worse to -1.
+ * @param {*} table 
+ * @param {*} answer 
+ * @param {*} minBound 
+ * @param {*} maxBound
+ * @returns index of the word (or -1 if index does not exsit)
+ */
 function binarySearch(table, answer, minBound, maxBound) {
     let mid = Math.floor((maxBound + minBound) / 2);
 
-    // Protect the case of an empty table (maxBound = -1)
+    // Stop condition if no value is returned
     if (minBound > maxBound)
         return (-1);
     if (answer.toUpperCase() == table[mid].toUpperCase())
@@ -24,8 +39,13 @@ function binarySearch(table, answer, minBound, maxBound) {
         return (binarySearch(table, answer, mid + 1, maxBound));
 }
 
-//
-function checkInput(answer, sortedTable) {
+/**
+ * This function checks if the valus fits to the regex
+ * @param {*} answer 
+ * @param {*} sortedTable
+ * @returns a boolean value
+ */
+function checkInput(answer) {
     if (answer.match(controlRegex)) {
         return (true);
     }
@@ -40,22 +60,20 @@ function checkInput(answer, sortedTable) {
  * @param {*} sortedTable 
  */
 function startGame(sortedTable) {
-    rl.question(`Please input a firstname : `, answer => {
-        if (checkInput(answer, sortedTable)) {
+    rl.question(`\nPlease input a firstname : `, answer => {
+        if (checkInput(answer)) {
             let minBound = 0;
             let maxBound = sortedTable.length - 1;
             let indexResult = binarySearch(sortedTable, answer, minBound, maxBound);
             if (indexResult < 0)
-                console.log(`${answer} isn't in this list`);
+                console.log(`\n${answer} isn't in this list\n`);
             else
-                console.log(`${answer} is at the index ${indexResult}`);
+                console.log(`\n${sortedTable[indexResult]} is at the index ${indexResult}\n`);
             rl.close();
             process.exit();
         }
-        else {
-            console.log(`Bad input`);
+        else
             startGame(sortedTable, answer);
-        }
     })
 }
 
@@ -116,9 +134,19 @@ function mergeSort(tableToSort) {
 }
 
 function main() {
+    //Title
+    console.log(`\n=============================`);
+    console.log(`### BINARY SEARCH PROGRAM ###`);
+    console.log(`=============================`);
+
+    // Store the content of the .txt in a table
     let stringTxt = fs.readFileSync(`Exercise0370.txt`);
     const tableTxt = stringTxt.toString().split("\r\n");
+
+    // Sort the table
     const sortedTable = mergeSort(tableTxt);
+
+    // Start game
     startGame(sortedTable);
 }
 main();
