@@ -29,8 +29,8 @@ class Employee {
         this.lastName = (_lastName || `Default`).toUpperCase();
         this.firstName = capitalize(_firstName || `Default`);
         this.role = capitalize(_role || `Default`);
-        this.salary = parseInt(_salary || -1);
-        this.hireDate = _hireDate || new Date(0 - 0 - 0);
+        this.salary = parseInt(_salary || 0);
+        this.hireDate = _hireDate || new Date();
         this.email = `${this.firstName[0].concat(this.lastName).toLowerCase()}@email.fr`;
     }
 

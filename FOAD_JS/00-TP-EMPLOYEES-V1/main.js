@@ -1,13 +1,20 @@
 const Employee = require(`./modules/employee.js`);
+const Company = require(`./modules/company.js`);
 
-var employee1 = new Employee(1, 'Doe', 'John', 'manager', 82000, new Date('2020-05-30'));
-var employee2 = new Employee(2, 'Bon', 'Jean', 'Charcutier', 22000, new Date('2022-05-29'));
-var employee3 = new Employee(3, 'Proviste', 'Alain', 'Formateur', 180000, new Date('2017-03-11'));
-var employee4 = new Employee(4, 'Moitou', 'Medhi', 'Directeur', 200000, new Date('2000-01-01'));
-var employee5 = new Employee(5, 'Outan', 'Laurent', 'Clown', 140000, new Date('1982-11-08'));
+var employee1 = new Employee('asd', 'Doe', 'John', 'manager', 'qweqw', new Date('2020-05-30'));
+var employee2 = new Employee(123, 'Doe', 'John', 'manager', 'qweqw', new Date('2020-05-30'));
+var employee3 = new Employee('asd', 'Doe', 'John', 'manager', 123, new Date('2020-05-30'));
+var employee4 = new Employee(123, 'Doe', 'John', 'manager', 132, new Date('2020-05-30'));
 
 console.log(employee1);
-console.log(employee2);
-console.log(employee3);
-console.log(employee4);
-console.log(employee5);
+
+var company1 = new Company();
+
+company1.create(employee1);
+company1.create(employee2);
+company1.create(employee3);
+company1.create(employee4);
+
+
+
+
