@@ -24,3 +24,6 @@ console.log(`\n##############\n`);
 console.log(company);
 
 console.log(company.read(2));
+
+console.log(company.update(new Employee(097, 'Coucou', 'Ca', 'va', 10000, new Date('2018-05-30'))));
+console.log(company);

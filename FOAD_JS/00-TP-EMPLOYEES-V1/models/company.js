@@ -3,7 +3,7 @@ const Employee = require('./employee.js');
 
 function isValidEmployee(_employee) {
     const UPPERCASE = /(^[A-Z]+)([ -]{1})?([A-Z]+$)/;
-    const CAPITALIZE = /(^[A-Z]{1}[a-z]{1,})([ -]{1}[A-Za-z]{1})?([a-z]+$)/;
+    const CAPITALIZE = /(^[A-Z]{1}[a-z]{1,})(([ -]{1}[A-Za-z]{1})?([a-z]+$))|(^[A-Z]{1}[a-z]{1,}$)/;
 
     if (!(_employee.id >= 0 && _employee.id < Infinity))
         return (false);
@@ -44,10 +44,20 @@ class Company {
     read(_id) {
         if (!(_id >= 0 && _id < Infinity))
             return (false);
-        let result = this.employeeDB.find((test) => { return test.id === parseInt(_id) });
-        if (result === undefined)
-            result = (false);
-        return (result);
+        let buffer = this.employeeDB.find((test) => test.id === parseInt(_id));
+        if (buffer === undefined)
+            buffer = (false);
+        return (buffer);
+    }
+
+    update(_employee) {
+        if (!(_employee.id >= 0 && _employee.id < Infinity) || !isValidEmployee(_employee))
+            return (false);
+        let buffer = this.employeeDB.find((test) => test.id === parseInt(_employee.id));
+        if (buffer === undefined)
+            return (false);
+        Object.assign(buffer, _employee);
+        return (true);
     }
 }
 
