@@ -22,3 +22,5 @@ company.create(new Employee());
 company.create(new Employee(0, 'Doef', 'Johnf', 'managerf', 1000, new Date('2020-05-30')));
 console.log(`\n##############\n`);
 console.log(company);
+
+console.log(company.read(2));

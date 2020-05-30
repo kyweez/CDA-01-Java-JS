@@ -13,19 +13,19 @@ function isValidEmployee(_employee) {
         return (false);
     if (!(_employee.salary >= 0 && _employee.salary < Infinity))
         return (false);
-    if(Object.prototype.toString.call(_employee.hireDate) !== "[object Date]" || isNaN(_employee.hireDate))
+    if (Object.prototype.toString.call(_employee.hireDate) !== "[object Date]" || isNaN(_employee.hireDate))
         return (false);
     return (true);
 }
 
-function changeID(_employeeDB, _employee){
+function changeID(_employeeDB, _employee) {
     staffing = _employeeDB.length;
-    if (staffing === 0){
+    if (staffing === 0) {
         return (parseInt(0));
     }
-    else{
-        _employeeDB.sort((first, second)=>first.id - second.id);
-        return (_employeeDB[staffing-1].id + 1);
+    else {
+        _employeeDB.sort((first, second) => first.id - second.id);
+        return (_employeeDB[staffing - 1].id + 1);
     }
 }
 
@@ -35,12 +35,20 @@ class Company {
     }
 
     create(_employee) {
-        if (isValidEmployee(_employee)){
+        if (isValidEmployee(_employee)) {
             _employee.id = changeID(this.employeeDB, _employee);
             this.employeeDB.push(_employee);
         }
     }
-}
 
+    read(_id) {
+        if (!(_id >= 0 && _id < Infinity))
+            return (false);
+        let result = this.employeeDB.find((test) => { return test.id === parseInt(_id) });
+        if (result === undefined)
+            result = (false);
+        return (result);
+    }
+}
 
 module.exports = Company;
