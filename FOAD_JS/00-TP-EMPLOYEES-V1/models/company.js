@@ -24,7 +24,8 @@ function changeID(_employeeDB, _employee){
         return (parseInt(0));
     }
     else{
-        _employeeDB[staffing -1]
+        //penser a trier
+        return (_employeeDB[staffing-1].id + 1);
     }
 }
 
@@ -39,11 +40,12 @@ class Company {
      */
     create(_employee) {
         if (isValidEmployee(_employee)){
-            _employee.id = this.employeeDB
+            _employee.id = changeID(this.employeeDB, _employee);
+            this.employeeDB.push(_employee);
         }
 
     }
 }
 
 
-module.exports = Conpany;
+module.exports = Company;
