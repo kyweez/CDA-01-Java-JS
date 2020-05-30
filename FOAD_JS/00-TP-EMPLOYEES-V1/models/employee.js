@@ -7,6 +7,12 @@ function capitalize(_inputString) {
     return (`${_inputString[0].toUpperCase()}${_inputString.substring(1).toLowerCase()}`);
 }
 
+function checkNumberInput(_number) {
+    if (parseInt(_number) >= 0 && parseInt(_number) < Infinity)
+        return (parseInt(_number));
+    return (-1);
+}
+
 /**
  * @class Employee
  */
@@ -25,11 +31,11 @@ class Employee {
      * @this email / first letter of the firstname + lastname + @email.fr (in lower case)
      */
     constructor(_id, _lastName, _firstName, _role, _salary, _hireDate) {
-        this.id = parseInt(_id || -1);
+        this.id = checkNumberInput(_id);
         this.lastName = (_lastName || `Default`).toUpperCase();
         this.firstName = capitalize(_firstName || `Default`);
         this.role = capitalize(_role || `Default`);
-        this.salary = parseInt(_salary || 0);
+        this.salary = checkNumberInput(_salary);
         this.hireDate = _hireDate || new Date();
         this.email = `${this.firstName[0].concat(this.lastName).toLowerCase()}@email.fr`;
     }

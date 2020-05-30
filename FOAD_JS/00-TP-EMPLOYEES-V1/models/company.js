@@ -24,7 +24,7 @@ function changeID(_employeeDB, _employee){
         return (parseInt(0));
     }
     else{
-        //penser a trier
+        _employeeDB.sort((first, second)=>first.id - second.id);
         return (_employeeDB[staffing-1].id + 1);
     }
 }
@@ -34,16 +34,11 @@ class Company {
         this.employeeDB = [];
     }
 
-    /**
-     * 
-     * @param  _filter 
-     */
     create(_employee) {
         if (isValidEmployee(_employee)){
             _employee.id = changeID(this.employeeDB, _employee);
             this.employeeDB.push(_employee);
         }
-
     }
 }
 
