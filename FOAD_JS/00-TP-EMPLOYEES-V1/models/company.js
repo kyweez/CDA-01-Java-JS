@@ -59,6 +59,16 @@ class Company {
         Object.assign(buffer, _employee);
         return (true);
     }
+
+    delete(_id){
+        if (!(_id >= 0 && _id < Infinity))
+            return (false);
+        let index = this.employeeDB.findIndex((test) => test.id === parseInt(_id));
+        if (index === parseInt(-1))
+            return (false);
+        this.employeeDB.splice(index, 1);
+        return (true);
+    }
 }
 
 module.exports = Company;
