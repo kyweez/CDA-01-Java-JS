@@ -60,7 +60,7 @@ class Company {
         return (true);
     }
 
-    delete(_id){
+    delete(_id) {
         if (!(_id >= 0 && _id < Infinity))
             return (false);
         let index = this.employeeDB.findIndex((test) => test.id === parseInt(_id));
@@ -69,6 +69,32 @@ class Company {
         this.employeeDB.splice(index, 1);
         return (true);
     }
+
+    readAll(_filter) {
+        return (this.employeeDB.sort((value1, value2) => {
+            switch (_filter) {
+                case `lastName`:
+                    return value1.lastName - value2.lastName;
+                case `firstName`:
+                    return value1.firstName - value2.firstName;
+                case `role`:
+                    return value1.role - value2.role;
+                case `salary`:
+                    return value1.salary - value2.salary;
+                case `hireDate`:
+                    return value1.hireDate - value2.hireDate;
+                case `email`:
+                    return value1.email - value2.email;
+                default:
+                    return value1.id - value2.id;
+            }
+        }));
+    }
+
+    getHigherSalary() {
+        this.employeeDB.sort((a, b) => a - b);
+    }
+
 }
 
 module.exports = Company;
