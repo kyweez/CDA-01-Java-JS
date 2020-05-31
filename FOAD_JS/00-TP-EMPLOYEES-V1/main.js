@@ -29,4 +29,8 @@ console.log(company.update(new Employee(097, 'Coucou', 'Ca', 'va', 10000, new Da
 console.log(company);
 company.delete(3);
 console.log(`\n#######123123#########\n`);
-console.log(company.readAll(`hireDate`));
+console.log(company.readAll(null));
+console.log(`\n##########################\n`);
+console.log(company.salary.highest());
+console.log(company.salary.lowest());
+console.log(company.salary.gap());

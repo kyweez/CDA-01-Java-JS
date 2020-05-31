@@ -39,6 +39,8 @@ class Company {
             _employee.id = changeID(this.employeeDB, _employee);
             this.employeeDB.push(_employee);
         }
+        else
+            return (false);
     }
 
     read(_id) {
@@ -74,27 +76,28 @@ class Company {
         return (this.employeeDB.sort((value1, value2) => {
             switch (_filter) {
                 case `lastName`:
-                    return value1.lastName - value2.lastName;
+                    return (value1.lastName - value2.lastName);
                 case `firstName`:
-                    return value1.firstName - value2.firstName;
+                    return (value1.firstName - value2.firstName);
                 case `role`:
-                    return value1.role - value2.role;
+                    return (value1.role - value2.role);
                 case `salary`:
-                    return value1.salary - value2.salary;
+                    return (value1.salary - value2.salary);
                 case `hireDate`:
-                    return value1.hireDate - value2.hireDate;
+                    return (value1.hireDate - value2.hireDate);
                 case `email`:
-                    return value1.email - value2.email;
+                    return (value1.email - value2.email);
                 default:
-                    return value1.id - value2.id;
+                    return (value1.id - value2.id);
             }
         }));
     }
 
-    getHigherSalary() {
-        this.employeeDB.sort((a, b) => a - b);
+    salary = {
+        highest: () => this.readAll('salary')[this.employeeDB.length-1].salary,
+        lowest: () => this.readAll('salary')[0].salary,
+        gap:     () => this.salary.highest() - this.salary.lowest()
     }
-
 }
 
 module.exports = Company;
