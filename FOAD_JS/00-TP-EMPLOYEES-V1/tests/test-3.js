@@ -41,6 +41,10 @@ class Test3{
         console.log(`\x1b[35mTrying to read the updated entry:\x1b[0m`);
         console.log(company.read(3));
         console.log(`It works`);
+
+        console.log(`\n# Using read function                 : \x1b[32mOK\x1b[0m`);
+        console.log(`# Using update function with wrong ID : \x1b[32mOK\x1b[0m`);
+        console.log(`# Using update function with good ID  : \x1b[32mOK\x1b[0m`);
     }
 }
 

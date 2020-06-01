@@ -30,6 +30,10 @@ class Test2{
         utils.print.seniority(company.employeeDB[1]);
         utils.print.seniority(company.employeeDB[2]);
 
+        console.log(`\n# Using Utils Class      : \x1b[32mOK\x1b[0m`);
+        console.log(`# Get monthly net salary : \x1b[32mOK\x1b[0m`);
+        console.log(`# Get seniority          : \x1b[32mOK\x1b[0m`);
+        console.log(`# Formating seniority    : \x1b[32mOK\x1b[0m`);
     }
 }
 

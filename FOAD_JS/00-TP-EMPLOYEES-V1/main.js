@@ -30,8 +30,8 @@ function checkValidInput(_answer, tabTest) {
 }
 
 function doTest(tabTest) {
-    let question = "\nWhich test do you want to perform ?\n1 - Test 1\n2 - Test 2\n3 - Test 3\n4 - Test 4\nQ - End the program\n";
-    RL.question(question, (answer) => {
+    let question = "\nWhich test do you want to perform ?\n1 - Test 1\n2 - Test 2\n3 - Test 3\n4 - Test 4\nQ - End the program";
+    RL.question(`\x1b[47m\x1b[30m${question.toUpperCase()}\x1b[0m\n`, (answer) => {
         checkValidInput(answer, tabTest);
     });
     // console.log(question);

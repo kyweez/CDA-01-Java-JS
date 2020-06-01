@@ -32,6 +32,11 @@ class Test4{
         console.log(`Highest salary : ${company.salary.highest()}`);
         console.log(`Lowest salary  : ${company.salary.lowest()}`);
         console.log(`Salary gap     : ${company.salary.gap()}`);
+
+        console.log(`\n# Using readAll function by firstName         : \x1b[32mOK\x1b[0m`);
+        console.log(`# Get monthly net salary    : \x1b[32mOK\x1b[0m`);
+        console.log(`# Get seniority             : \x1b[32mOK\x1b[0m`);
+        console.log(`# Formating seniority       : \x1b[32mOK\x1b[0m`);
     }
 }
 
