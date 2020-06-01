@@ -11,7 +11,6 @@ class Utils {
                 console.log(`\n${_employee.firstName} ${_employee.lastName} seniority : ${seniorityTab[0]} year(s), ${seniorityTab[1]} month(s) and ${seniorityTab[2]} day(s)`);
 
         }
-
     }
 }
 
