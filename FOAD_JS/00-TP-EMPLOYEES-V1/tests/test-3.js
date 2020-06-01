@@ -1,6 +1,5 @@
 const Employee = require(`./../models/employee.js`);
 const Company = require(`./../models/company.js`);
-const Utils = require(`./../models/utils.js`);
 
 class Test3{
     constructor(){
@@ -11,7 +10,7 @@ class Test3{
         console.log(this.title);
         console.log("########################################################################\n");
         
-        console.log(`\x1b[35mCreating 3 employees : \n\x1b[0m`);
+        console.log(`\x1b[35mCreating 4 employees : \n\x1b[0m`);
         let company = new Company();
         company.create(new Employee(123, `Macron`,`Emmanuel`, `President`, 999999, new Date(`2017-05-14`)));
         company.create(new Employee(123, `Hollande`,`Francois`, `Chomeur`, 220000, new Date(`2012-05-15`)));
@@ -19,8 +18,6 @@ class Test3{
         company.create(new Employee(123, `Melenchon`,`Jean-Luc`, `Clown`, 24000, new Date(`2022-05-14`)));
 
         console.log(company.employeeDB);
-        
-        let utils = new Utils();
         
         console.log(`\n\x1b[35mTesting the read(_id) function (using id 3):\x1b[0m`);
         console.log(company.read(3));
