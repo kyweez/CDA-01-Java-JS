@@ -28,7 +28,7 @@ function isValidEmployee(_employee) {
  * @param Employee _employee
  * @returns A number of the new to set 
  */
-function changeID(_employeeDB, _employee) {
+/*function changeID(_employeeDB, _employee) {
     staffing = _employeeDB.length;
     if (staffing === 0) {
         return (parseInt(0));
@@ -37,7 +37,7 @@ function changeID(_employeeDB, _employee) {
         _employeeDB.sort((first, second) => first.id - second.id);
         return (_employeeDB[staffing - 1].id + 1);
     }
-}
+}*/
 
 /**
  * @class Company
@@ -50,6 +50,15 @@ class Company {
     constructor() {
         this.employeeDB = [];
     }
+    
+    /**
+     * This function returns an unique number depending of the previous IDs 
+     * @returns A number of the new to set 
+     */
+    newID() {
+        let lastId = (this.employeeDB.length > 0) ? Math.max(...this.employeeDB.map(user => user.id)) : 0;
+        return lastId + 1;        
+    }
 
     /**
      * This function creates a new entry in the database
@@ -58,7 +67,8 @@ class Company {
      */
     create(_employee) {
         if (isValidEmployee(_employee)) {
-            _employee.id = changeID(this.employeeDB, _employee);
+            //_employee.id = changeID(this.employeeDB, _employee);
+            _employee.id = this.newID();
             this.employeeDB.push(_employee);
         }
         else
