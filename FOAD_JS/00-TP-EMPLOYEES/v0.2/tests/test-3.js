@@ -1,5 +1,5 @@
-const Employee = require(`./../models/employee.js`);
-const Company = require(`./../models/company.js`);
+const Employee = require(`../models/employee.js`);
+const Company = require(`../models/company.js`);
 
 class Test3{
     constructor(){

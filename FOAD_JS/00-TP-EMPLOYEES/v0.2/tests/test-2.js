@@ -1,6 +1,6 @@
-const Employee = require(`./../models/employee.js`);
-const Company = require(`./../models/company.js`);
-const Utils = require(`./../models/utils.js`);
+const Employee = require(`../models/employee.js`);
+const Company = require(`../models/company.js`);
+const Utils = require(`../models/utils.js`);
 
 class Test2{
     constructor(){
