@@ -4,7 +4,7 @@ function create2DArray(_width, _height) {
         let i = 0;
         let tab = [];
         for (i; i < _width; i++) {
-            tab.push(0);
+            tab.push(`□`);
         }
         return (tab);
     }
@@ -33,43 +33,30 @@ class Area {
     }
 
     getGrid() {
-        let i = 0;
-        let j;
+        let i;
+        let length;
         let grid = "";
 
         for (const tab of this.area) {
-            j = 0;
-            let camecasselescouilles = tab.length;
-            for (j; j< tab.lenght; j++){
-                console.log(grid);
-                if (tab[j] instanceof Area){
-                    grid += `+`;
-                }
-                grid += tab[j];
+            i = 0;
+            length = tab.length;
+            for (i; i < length; i++) {
+                if (tab[i] instanceof Area)
+                    grid += `\x1b[31m█ \x1b[0m`;
+                else
+                    grid += `\x1b[34m${tab[i]} \x1b[0m`;
             }
+            grid += `\n`;
         }
         return (grid);
     }
-
-    // getGrid() {
-    //     let i = 0;
-    //     let j;
-    //     let grid = "";
-
-    //     for (i; i < this.area.lenght; i++) {
-    //         j = 0;
-    //         for (j; j< area[i].lenght; j++){
-    //             if (this.area[i][j] instanceof Area){
-    //                 grid += `+`;
-    //             }
-    //             grid += this.area[i][j];
-    //         }
-    //     }
-    //     return (grid);
-    // }
 }
 
-let area = new Area(6, 3);
-console.log(area);
-
+let area = new Area(31, 31);
+let j = 30;
+for (let i = 0; i < 31; i++) {
+    area.area[i][i] = new Area(i, i);
+    area.area[i][j] = new Area(i, i);
+    j--;
+}
 console.log(area.getGrid());
