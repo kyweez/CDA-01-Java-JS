@@ -23,23 +23,6 @@ function isValidEmployee(_employee) {
 }
 
 /**
- * This function returns an unique number depending of the previous IDs 
- * @param Object[] _employeeDB 
- * @param Employee _employee
- * @returns A number of the new to set 
- */
-/*function changeID(_employeeDB, _employee) {
-    staffing = _employeeDB.length;
-    if (staffing === 0) {
-        return (parseInt(0));
-    }
-    else {
-        _employeeDB.sort((first, second) => first.id - second.id);
-        return (_employeeDB[staffing - 1].id + 1);
-    }
-}*/
-
-/**
  * @class Company
  */
 class Company {
@@ -53,7 +36,7 @@ class Company {
     
     /**
      * This function returns an unique number depending of the previous IDs 
-     * @returns A number of the new to set 
+     * @returns A number of the new ID to set 
      */
     newID() {
         let lastId = (this.employeeDB.length > 0) ? Math.max(...this.employeeDB.map(user => user.id)) : 0;
