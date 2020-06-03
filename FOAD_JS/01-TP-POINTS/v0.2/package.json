@@ -22,5 +22,8 @@
   "bugs": {
     "url": "https://github.com/kyweez/CDA-01-Java-JS/issues"
   },
-  "homepage": "https://github.com/kyweez/CDA-01-Java-JS#readme"
+  "homepage": "https://github.com/kyweez/CDA-01-Java-JS#readme",
+  "directories": {
+    "test": "tests"
+  }
 }
