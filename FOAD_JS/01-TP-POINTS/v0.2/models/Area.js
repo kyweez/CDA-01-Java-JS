@@ -73,7 +73,7 @@ class Area {
      * If the point already exists, returns false.
      * If the point can be set, put the point into the corresponding cell.
      * @param Point _point 
-     * @returns Boolean true en cas de succès, false si l'ajout est impossible 
+     * @returns Boolean true or false
      */
     addPoint(_point) {
         if (!(_point instanceof Point))
@@ -100,6 +100,32 @@ class Area {
         return (true);
     }
 
+    /**
+     * Move a point to another coordinates
+     * The new coordinates ccan be outside of the gameArea
+     * @param int abscissa 
+     * @param int ordinate
+     * @returns Boolean true or false
+     */
+    movePoint(_point, abscissa, ordinate) {
+        if (!(_point instanceof Point))
+            return (false);
+        if (this.totalArea[_point.y][_point.x] !== _point)
+            return false;
+        if (abscissa < this.totalAreaWidth && ordinate< this.totalAreaHeight){
+            if (this.totalArea[ordinate][abscissa] instanceof Point)
+                return (false);
+            this.totalArea[ordinate][abscissa] = _point;
+            this.totalArea[_point.y][_point.x] = SYMBOL;
+            _point.x = abscissa;
+            _point.y = ordinate;
+            return (true);
+        }
+        else{
+            //TODO 
+        }
+
+    }
     /**
      * This function returns the full grid. There is 2 areas, the game area included in the total area.
      * Point outside the game area are colored red
