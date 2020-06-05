@@ -33,6 +33,12 @@ class Area {
         })();
     }
 
+    /**
+     * This function returns the new tab[][] with "y" more ordinates 
+     * @param Object[] tab2D 
+     * @param int y
+     * @returns tab2D
+     */
     pushOrdinate(tab2D, y) {
         let abscissaLength = tab2D[0].length;
         for (let i = 0; i < y; i++) {
@@ -46,6 +52,12 @@ class Area {
         return (tab2D);
     }
 
+    /**
+     * This function returns the new tab[][] with "x" more abscissas 
+     * @param Object[] tab2D 
+     * @param int x
+     * @returns tab2D
+     */
     pushAbscissa(tab2D, x) {
         let ordinateLength = tab2D.reduce((count, row) => (count + row.length / row.length), 0);
         for (let i = 0; i < ordinateLength; i++) {
@@ -57,7 +69,9 @@ class Area {
 
     /**
      * This function add a Point in the area
-     * Le "Point" peut se trouver hors des limites de la zone
+     * The point can be outside of the game area. If so, the totalArea is increased.
+     * If the point already exists, returns false.
+     * If the point can be set, put the point into the corresponding cell.
      * @param Point _point 
      * @returns Boolean true en cas de succès, false si l'ajout est impossible 
      */
