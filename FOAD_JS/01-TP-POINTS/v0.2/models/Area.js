@@ -86,7 +86,7 @@ class Area {
             this.totalArea[_point.y][_point.x] = SYMBOL;
             _point.x = abscissa;
             _point.y = ordinate;
-            // TODO supprimer repere si dernier point du repere
+            this.refactorTotalArea(this.checkMaxBound());
             return (true);
         }
         else {
@@ -149,8 +149,6 @@ class Area {
         let isPoint = false;
         let maxAbscissa = this.totalAreaWidth - 1;
         let maxOrdinate = this.totalAreaHeight - 1;
-
-
         while (!isPoint) {
             i = 0;
             while (i < this.totalAreaHeight && !isPoint) {
@@ -185,6 +183,21 @@ class Area {
         return (maxPoint);
     }
 
+    refactorTotalArea(_point) {
+        if (!(_point instanceof Point))
+            return (false);
+        if (_point.x < this.gameAreaWidth)
+            (_point.x = this.gameAreaWidth-1);
+        if (_point.y < this.gameAreaHeight)
+            (_point.y = this.gameAreaHeight-1);
+        for (let i = 0; i <= _point.y; i++)
+            this.totalArea[i] = this.totalArea[i].splice(0, _point.x + 1);
+        this.totalArea = this.totalArea.splice(0, _point.y + 1)
+        this.totalAreaHeight = _point.y + 1;
+        this.totalAreaWidth = _point.x + 1;
+        return (true);
+    }
+
     /**
      * This function returns the full grid. There is 2 areas, the game area included in the total area.
      * Point outside the game area are colored red
@@ -217,24 +230,13 @@ class Area {
     }
 }
 
-let area = new Area(5, 5);
-area.addPoint(new Point(4, 4));
-area.addPoint(new Point(4, 4));
-area.addPoint(new Point(5, 5));
-area.addPoint(new Point(5, 5));
-area.addPoint(new Point(6, 6));
-area.addPoint(new Point(7, 7));
-console.log(area.getGrid());
-// area.movePoint(area.totalArea[4][4], 0, 0);
-// console.log(area.getGrid());
-let point1 = new Point(8, 0);
+let area = new Area(4, 4);
+let point1 = new Point(1, 1);
+let point2 = new Point(6, 6);
 area.addPoint(point1);
+area.addPoint(point2);
 console.log(area.getGrid());
-area.movePoint(point1, 10, 10);
+area.movePoint(point2, 4, 4);
 console.log(area.getGrid());
-area.movePoint(point1, 8, 8);
+area.movePoint(point2, 2, 2);
 console.log(area.getGrid());
-console.log(area.checkMaxBound());
-area.movePoint(point1, 12, 12);
-console.log(area.getGrid());
-console.log(area.checkMaxBound());
