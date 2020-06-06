@@ -1,0 +1,24 @@
+Parmi les éléments suivants, lesquels sont des objets, et pourquoi ?
+
+- Le poste de télévision du salon
+- La qualité du compilateur
+- La deuxième guerre mondiale
+- James Rumbaugh
+- La racine carrée de 4
+- Une transaction boursière
+- La vitesse de la lumière
+
+Reponses : 
+
+- Le poste de télévision du salon : 
+Ca peut etre un objet qui comporte plusieurs attibuts (taille, marque, type, etc...) et qui comporte plusieurs methodes (allumer, eteindre, enregistrer, etc...) 
+
+- La deuxième guerre mondiale : 
+On pourrait avoir cet objet dans un jeu video par exemple.
+
+- James Rumbaugh : 
+Cela peut etre une instance (donc un objet) d'une classe Personne par exemple.
+
+- Une transaction boursière :
+Ca peut etre un objet dans un logiciel bancaire avec des attributs tels que (montant, frequence, destinataire) et des fonctions (effectuer, annuler, etc...)
+
