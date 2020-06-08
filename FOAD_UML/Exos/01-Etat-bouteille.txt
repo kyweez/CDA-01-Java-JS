@@ -10,3 +10,5 @@ Rechercher les états possibles de la bouteille :
 2 - Ouverte pleine
 3 - Fermée vide
 4 - Fermée pleine
+5 - Ouverte en train de remplir
+6 - Ouverte en train de vider
