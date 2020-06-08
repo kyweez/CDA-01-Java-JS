@@ -143,6 +143,10 @@ class Area {
         return (tab2D);
     }
 
+    /**
+     * This function checks the max bound of abscissa and ordinate.
+     * @returns A theorical point (max_X, max_Y)
+     */
     checkMaxBound() {
         let maxPoint = new Point();
         let i = 0;
@@ -183,6 +187,11 @@ class Area {
         return (maxPoint);
     }
 
+    /**
+     * This function cuts the totalArea depending of the Point given as parameter
+     * @param Point _point
+     * @returns True if everything went well, false if something failed.
+     */
     refactorTotalArea(_point) {
         if (!(_point instanceof Point))
             return (false);
