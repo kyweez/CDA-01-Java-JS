@@ -1,0 +1,8 @@
+- Comment devons-nous donc utiliser l'héritage pour obtenir une hiérarchie de classes bonne et robuste ?
+En specifiant plus precisement les classes enfants avec des attributs differents et/ou des surcharges.
+
+- Que se passe-t-il si nous voulons décrire des hommes vieux, ayant quelques caractéristiques différentes de celles de leurs jeunes collègues ?
+On creer une classe enfant de Homme qui va benificier d'attributs supplementaires (ex : boolean retraité, function utiliser deambulateur, etc...).
+
+- Par exemple il ne peuvent pas danser de la même manière qu'un homme jeune.
+Dans ce cas, on peut surcharger la methode "danser" qui sera legerement differente de la methode de son parent.
