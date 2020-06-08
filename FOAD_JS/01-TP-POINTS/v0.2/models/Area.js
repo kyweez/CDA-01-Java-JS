@@ -239,13 +239,15 @@ class Area {
     }
 }
 
-let area = new Area(4, 4);
-let point1 = new Point(1, 1);
-let point2 = new Point(6, 6);
+let area = new Area(5, 5);
+let point1 = new Point(0,0);
 area.addPoint(point1);
+let point2 = new Point(4,4);
 area.addPoint(point2);
-console.log(area.getGrid());
-area.movePoint(point2, 4, 4);
-console.log(area.getGrid());
-area.movePoint(point2, 2, 2);
+let point3 = new Point(6,6);
+area.addPoint(point3);
+let point4 = new Point(2,2);
+area.addPoint(point4);
+area.movePoint(point4, 10, 8);
+
 console.log(area.getGrid());
