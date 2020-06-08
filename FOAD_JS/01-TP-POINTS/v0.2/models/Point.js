@@ -42,8 +42,11 @@ class Point {
      * @param Point _point 
      */
     copy(_point) {
+        if (_point instanceof Point)
+            return (false);
         this.x = _point.x;
         this.y = _point.y;
+        return (true);
     }
 
     /**
@@ -51,9 +54,12 @@ class Point {
      * @param Point _point 
      */
     rabbit(_point) {
+        if (_point instanceof Point)
+            return (false);
         let temp = this.duplicate(this);
         this.move(_point.x, _point.y);
         _point.copy(temp);
+        return (true);
     }
 }
 
