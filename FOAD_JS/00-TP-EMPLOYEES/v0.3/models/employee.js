@@ -1,17 +1,4 @@
-/**
- * This capitalizes the first letter of the input string.
- * @param string _inputString
- * @returns the formated string
- */
-function capitalize(_inputString) {
-    return (`${_inputString[0].toUpperCase()}${_inputString.substring(1).toLowerCase()}`);
-}
-
-function checkNumberInput(_number) {
-    if (parseInt(_number) >= 0 && parseInt(_number) < Infinity)
-        return (parseInt(_number));
-    return (-1);
-}
+const Security = require(`./Security.js`);
 
 /**
  * @class Employee
@@ -31,12 +18,18 @@ class Employee {
      * @this email / first letter of the firstname + lastname + @email.fr (in lower case)
      */
     constructor(_id, _lastName, _firstName, _role, _salary, _hireDate) {
-        this.id = checkNumberInput(_id);
-        this.lastName = (_lastName || `Default`).toUpperCase();
-        this.firstName = capitalize(_firstName || `Default`);
-        this.role = capitalize(_role || `Default`);
-        this.salary = checkNumberInput(_salary);
-        this.hireDate = _hireDate || new Date();
+
+    }
+
+    copy(_employee){
+        _employee = _employee || {};
+
+        this.id = Security.checkNumberInput(_emmployee.id || 0);
+        this.lastName = (_employee.lastName || `Default`).toUpperCase();
+        this.firstName = Security.capitalize(_employee.firstName || `Default`);
+        this.role = Security.capitalize(_employee.role || `Default`);
+        this.salary = Security.checkNumberInput(_employee.salary);
+        this.hireDate = hireDate || new Date();
         this.email = `${this.firstName[0].concat(this.lastName).toLowerCase()}@email.fr`;
     }
 

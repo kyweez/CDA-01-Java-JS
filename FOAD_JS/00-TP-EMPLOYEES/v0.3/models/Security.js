@@ -23,4 +23,15 @@ class Security {
             return (false);
         return (true);
     }
+
+    checkNumberInput(_number) {
+        if (parseInt(_number) >= 0 && parseInt(_number) < Infinity)
+            return (parseInt(_number));
+        /** @todo verifier si -1 ou 0 */
+        return (-1);
+    }
+
+    capitalize(_inputString) {
+        return (`${_inputString[0].toUpperCase()}${_inputString.substring(1).toLowerCase()}`);
+    }
 }

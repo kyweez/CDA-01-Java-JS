@@ -1,26 +1,7 @@
-const Employee = require('./employee.js');
-
-/**
- * This function returns either true if the _employee match to the test or false
- * @param Employee _employee
- * @returns Boolean 
- */
-function isValidEmployee(_employee) {
-    const UPPERCASE = /(^[A-Z]+)([ -]{1})?([A-Z]+$)/;
-    const CAPITALIZE = /(^[A-Z]{1}[a-z]{1,})(([ -]{1}[A-Za-z]{1})?([a-z]+$))|(^[A-Z]{1}[a-z]{1,}$)/;
-
-    if (!(_employee.id >= 0 && _employee.id < Infinity))
-        return (false);
-    if (!_employee.lastName.match(UPPERCASE))
-        return (false);
-    if (!_employee.firstName.match(CAPITALIZE) || !_employee.role.match(CAPITALIZE))
-        return (false);
-    if (!(_employee.salary >= 0 && _employee.salary < Infinity))
-        return (false);
-    if (Object.prototype.toString.call(_employee.hireDate) !== "[object Date]" || isNaN(_employee.hireDate))
-        return (false);
-    return (true);
-}
+const Employee = require(`./Employee.js`);
+const Security = require(`./Security.js`);
+const fs = require(`fs`);
+const path = require(`path`);
 
 /**
  * @class Company
@@ -30,47 +11,66 @@ class Company {
     /**
      * @constructor for the Company model
      */
-    constructor() {
+    constructor(_companyName) {
+        this.companyName = _companyName || `Default`;
         this.employeeDB = [];
+        this.filename = path.resolve(__dirname, "../data/" + _name + ".json");
+        if (fs.existsSync(this.filename)) {
+            let raw = fs.readFileSync(this.filename);
+            let json = JSON.parse(raw);
+            json.forEach(emp => {
+                this.create(new Employee(emp));
+            });
+        }
+        else {
+            console.log(`Cannot find ${this.filename}`);
+            fs.writeFileSync(this.filename, "[]"); // création du fichier. Le second paramètre est un tableau vide au format JSON.
+        }
     }
-    
+
+    /**
+     * Save the employee collection in the JSON file.
+     */
+    save() {
+        let json = JSON.stringify(this.employees);
+        fs.writeFileSync(this.filename, json);
+    }
+
     /**
      * This function returns an unique number depending of the previous IDs 
      * @returns A number of the new ID to set 
      */
     newID() {
-        let lastId = (this.employeeDB.length > 0) ? Math.max(...this.employeeDB.map(user => user.id)) : 0;
-        return lastId + 1;        
+        let lastId = (this.employeeDB.length > 0) ? Math.max(this.employeeDB.map(user => user.id)) : 0;
+        return lastId + 1;
     }
 
     /**
-     * This function creates a new entry in the database
+     * This function creates a new entry in the table
      * @param Employee _employee
      * @returns false if an error occurs when creating the new DB entry
      */
     create(_employee) {
-        if (isValidEmployee(_employee)) {
-            //_employee.id = changeID(this.employeeDB, _employee);
-            _employee.id = this.newID();
-            this.employeeDB.push(_employee);
-        }
-        else
+        if (!Security.isValidEmployee(_employee))
             return (false);
+        _employee.id = this.newID();
+        this.employeeDB.push(_employee);
     }
 
     /**
-     * This function returns the desired Employee object
+     * This function returns A COPY of the desired Employee object
+     * The find method returns undefined if nothing is found. undifined is returned if nothing is found.
      * @param int _id 
-     * @returns1 the Employee Object which has the ID given as an argument
-     * @returns2 false if the ID doesn't exist
+     * @returns1 a copy of the desired Employee
+     * @returns2 undefined if the Employee is not found.
      */
     read(_id) {
         if (!(_id >= 0 && _id < Infinity))
-            return (false);
-        let buffer = this.employeeDB.find((test) => test.id === parseInt(_id));
-        if (buffer === undefined)
-            buffer = (false);
-        return (buffer);
+            return (undefined);
+        let result = this.employeeDB.find(employeeTest => employeeTest.id === parseInt(_id));
+        if (result === undefined)
+            return (result);
+        return (Object.assign(new Employee(), result));
     }
 
     /**
@@ -81,12 +81,25 @@ class Company {
      */
     update(_employee) {
         if (!(_employee.id >= 0 && _employee.id < Infinity) || !isValidEmployee(_employee))
-            return (false);
+            return (undefined);
         let buffer = this.employeeDB.find((test) => test.id === parseInt(_employee.id));
         if (buffer === undefined)
             return (false);
         Object.assign(buffer, _employee);
         return (true);
+    }
+
+    update(_employee) {
+
+        let exists = this.employees.find(e => e.id === _employee.id); // récupération de l'employé dans la collection (le vrai, pas une copie !!!)
+
+        if (exists !== undefined) { // si l'employé correspondant a été trouvé
+            // copie des données de "_employee" vers "exists"
+            exists.copy(_employee);
+            return exists;
+        }
+
+        return exists;
     }
 
     /**
