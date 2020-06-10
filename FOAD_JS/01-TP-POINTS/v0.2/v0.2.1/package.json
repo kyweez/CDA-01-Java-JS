@@ -1,0 +1,29 @@
+{
+  "name": "01-tp-points",
+  "version": "0.0.2.1",
+  "description": "Definition of a point",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyweez/CDA-01-Java-JS.git"
+  },
+  "keywords": [
+    "coordonate",
+    "point",
+    "ordinate",
+    "abscissa"
+  ],
+  "author": "kyweez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kyweez/CDA-01-Java-JS/issues"
+  },
+  "homepage": "https://github.com/kyweez/CDA-01-Java-JS#readme",
+  "directories": {
+    "test": "tests"
+  }
+}
