@@ -17,8 +17,16 @@ class Employee {
      * 
      * @this email / first letter of the firstname + lastname + @email.fr (in lower case)
      */
-    constructor(_id, _lastName, _firstName, _role, _salary, _hireDate) {
-
+    constructor(_employee) {
+        this.id = 0;
+        this.lastName = "Default";
+        this.firstName = "Default";
+        this.role = "Default";
+        this.salary = 0;
+        this.hireDate = new Date();
+        this.email = "default@email.fr";
+        if (_employee !== undefined)
+            this.copy(_employee);
     }
 
     copy(_employee){

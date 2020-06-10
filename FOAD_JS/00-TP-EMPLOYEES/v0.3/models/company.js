@@ -80,26 +80,12 @@ class Company {
      * @returns2 Boolean false if the update failed
      */
     update(_employee) {
-        if (!(_employee.id >= 0 && _employee.id < Infinity) || !isValidEmployee(_employee))
+        if (!(_employee.id >= 0 && _employee.id < Infinity) || !Security.isValidEmployee(_employee))
             return (undefined);
-        let buffer = this.employeeDB.find((test) => test.id === parseInt(_employee.id));
-        if (buffer === undefined)
-            return (false);
-        Object.assign(buffer, _employee);
-        return (true);
-    }
-
-    update(_employee) {
-
-        let exists = this.employees.find(e => e.id === _employee.id); // récupération de l'employé dans la collection (le vrai, pas une copie !!!)
-
-        if (exists !== undefined) { // si l'employé correspondant a été trouvé
-            // copie des données de "_employee" vers "exists"
-            exists.copy(_employee);
-            return exists;
-        }
-
-        return exists;
+        let result = this.employeeDB.find(employeeTest => employeeTest.id === parseInt(_employee.id));
+        if (result === undefined)
+            return (undefined);
+        return (result.copy(_employee));
     }
 
     /**
@@ -111,7 +97,7 @@ class Company {
     delete(_id) {
         if (!(_id >= 0 && _id < Infinity))
             return (false);
-        let index = this.employeeDB.findIndex((test) => test.id === parseInt(_id));
+        let index = this.employeeDB.findIndex(employeeTest => employeeTest.id === parseInt(_id));
         if (index === parseInt(-1))
             return (false);
         this.employeeDB.splice(index, 1);
