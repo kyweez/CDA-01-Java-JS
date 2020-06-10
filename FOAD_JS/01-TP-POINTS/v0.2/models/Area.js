@@ -2,6 +2,8 @@ const Point = require(`./Point.js`);
 const SYMBOL = `  `;
 
 class Area {
+    /** Origine instanciation : private because we musn't move this point **/
+    #origine = new Point(0,0);
 
     /**
      * @constructor Initialize a new instance of the "Area" class
@@ -31,8 +33,12 @@ class Area {
             }
             return (tab2D);
         })();
+        this.totalArea[0][0] = this.getOrigine();
     }
 
+    getOrigine(){
+        return(this.#origine);
+    }
 
     /**
      * This function add a Point in the area
@@ -239,15 +245,5 @@ class Area {
     }
 }
 
-let area = new Area(5, 5);
-let point1 = new Point(0,0);
-area.addPoint(point1);
-let point2 = new Point(4,4);
-area.addPoint(point2);
-let point3 = new Point(6,6);
-area.addPoint(point3);
-let point4 = new Point(2,2);
-area.addPoint(point4);
-area.movePoint(point4, 10, 8);
-
+let area = new Area(4, 4);
 console.log(area.getGrid());
