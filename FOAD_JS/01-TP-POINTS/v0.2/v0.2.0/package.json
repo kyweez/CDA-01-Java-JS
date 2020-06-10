@@ -1,6 +1,6 @@
 {
   "name": "01-tp-points",
-  "version": "0.0.2",
+  "version": "0.0.2.0",
   "description": "Definition of a point",
   "main": "main.js",
   "scripts": {
