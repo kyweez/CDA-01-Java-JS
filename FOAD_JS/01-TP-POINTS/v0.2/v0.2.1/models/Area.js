@@ -34,7 +34,13 @@ class Area {
         // this.updateFreeCellsTable(_point);
         return true;
     }
-
+    
+    /**
+     * This function checks if the Point given as parameter is free on this.tab
+     * If cell is free, return true, else return false
+     * @param Point _point
+     * @returns boolean true/false
+     */
     isFreeCell(_point) {
         if (!(_point instanceof Point))
             return (false);
