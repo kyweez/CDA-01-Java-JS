@@ -1,4 +1,5 @@
 const Point = require(`./Point.js`);
+const Bfs = require(`./Bfs.js`);
 
 class Area {
     /**
@@ -27,10 +28,10 @@ class Area {
         if (this.tab.length >= this.tabSize)
             return (false);
         if (!this.isFreeCell(_point))
-            _point.copy(this.freeCellsTable[0]);
-        this.tab.push(_point);
+            // _point.copy(this.freeCellsTable[0]);
+            this.tab.push(_point);
         this.tabSize++;
-        this.updateFreeCellsTable(_point);
+        // this.updateFreeCellsTable(_point);
         return true;
     }
 
@@ -44,29 +45,41 @@ class Area {
 
     freeCellsCalcul() {
         let freeCells = [];
-        let x;
-        let y;
-        let maxFreeCells = this.tabSize - this.tab.length;
-        for (y = 0; y < this.height; y++) {
-            for (x = 0; x < this.width; x++) {
-                if (this.isFreeCell(new Point(x, y))) {
-                    freeCells.push(new Point(x, y));
-                    maxFreeCells--;
-                    if (maxFreeCells === 0)
-                        return (freeCells);
+        let x = 0;
+        let y = 0;
+        let bfs = new Bfs(this.width, this.height);
+        let node;
+        bfs.insertInQueue(new Point(x, y));
+        bfs.visited[y][x] = (true);
+        while (bfs.queue.length > 0) {
+            node = bfs.removeFromQueue();
+            if (this.isFreeCell(node))
+                freeCells.push(node);
+            if (node.x + 1 < this.width && node.y + 1 < this.height) {
+                if (!bfs.visited[node.y][node.x + 1]) {
+                    bfs.insertInQueue(new Point(node.x + 1, node.y));
+                    bfs.visited[node.y][node.x + 1] = (true);
+                }
+                if (!bfs.visited[node.y + 1][node.x]) {
+                    bfs.insertInQueue(new Point(node.x, node.y + 1));
+                    bfs.visited[node.y + 1][node.x] = (true);
                 }
             }
         }
+        let node2 = node.duplicate();
+        node2.x++;
+        if (this.isFreeCell(node2))
+                freeCells.push(node2);
         return (freeCells);
     }
-
-    updateFreeCellsTable(_point) {
-        if (!(_point instanceof Point))
-            return (false);
-        let index = this.freeCellsTable.findIndex(test => test.x === _point.x && test.y === _point.y);
-        this.freeCellsTable.splice(index, 1);
-        return (true);
-    }
+    
+    // updateFreeCellsTable(_point) {
+    //     if (!(_point instanceof Point))
+    //         return (false);
+    //     let index = this.freeCellsTable.findIndex(test => test.x === _point.x && test.y === _point.y);
+    //     this.freeCellsTable.splice(index, 1);
+    //     return (true);
+    // }
 
     /**
      * Déplace un point existant dans la zone vers de nouvelles coordonnées
@@ -88,11 +101,8 @@ class Area {
     }
 }
 
-let area = new Area(3, 3);
-console.log(area);
-let point1 = new Point(1, 1);
-area.addPoint(point1);
-console.log(area);
+let area = new Area(300, 400);
+console.log(area.freeCellsTable);
 
 // let point2 = new Point(1, 0);
 // let point3 = new Point(0, 2);
