@@ -42,7 +42,7 @@ class Point {
      * @param Point _point 
      */
     copy(_point) {
-        if (_point instanceof Point)
+        if (!(_point instanceof Point))
             return (false);
         this.x = _point.x;
         this.y = _point.y;
