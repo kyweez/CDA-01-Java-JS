@@ -3,10 +3,10 @@ const Bfs = require(`./Bfs.js`);
 
 class Area {
     /**
-     * Constructeur: Initialise une nouvelle instance de la classe "Area"
-     * La largeur et la hauteur définissent respectivement le nombre de colonnes et de lignes. 
-     * @param int _width largeur de la zone
-     * @param int _height hauteur de la zone
+     * @constructor Initializes a new instance of the "Area" class
+     * The width and the height respectively define the number of columns and rows. 
+     * @param int _width of the area
+     * @param int _height of the area
      */
     constructor(_width, _height) {
         this.width = parseInt(_width || 1);
@@ -17,24 +17,26 @@ class Area {
     }
 
     /**
-     * Ajoute un "Point" dans la zone
-     * Le "Point" peut se trouver hors des limites de la zone
+     * Add a "Point" in the area
+     * The "Point" can be outside of the gameArea
      * @param Point _point 
-     * @returns Boolean true en cas de succès, false si l'ajout est impossible 
+     * @returns Boolean true/false 
      */
     addPoint(_point) {
         if (!(_point instanceof Point))
             return (false);
         if (this.tab.length >= this.tabSize)
             return (false);
-        if (!this.isFreeCell(_point))
-            // _point.copy(this.freeCellsTable[0]);
+        if (!this.isFreeCell(_point)) {
+            _point.copy(this.freeCellsTable[0]);
             this.tab.push(_point);
+        }
+
         this.tabSize++;
-        // this.updateFreeCellsTable(_point);
+        this.updateFreeCellsTable(_point);
         return true;
     }
-    
+
     /**
      * This function checks if the Point given as parameter is free on this.tab
      * If cell is free, return true, else return false
@@ -49,6 +51,11 @@ class Area {
         return (true);
     }
 
+    /**
+     * This function searchs free cells in the game area and sorts it in a table.
+     * The sort is made by an data structure algorithm Breadth-first search.
+     * @returns a table of free cells in the game area
+     */
     freeCellsCalcul() {
         let freeCells = [];
         let x = 0;
@@ -75,51 +82,44 @@ class Area {
         let node2 = node.duplicate();
         node2.x++;
         if (this.isFreeCell(node2))
-                freeCells.push(node2);
+            freeCells.push(node2);
         return (freeCells);
     }
-    
-    // updateFreeCellsTable(_point) {
-    //     if (!(_point instanceof Point))
-    //         return (false);
-    //     let index = this.freeCellsTable.findIndex(test => test.x === _point.x && test.y === _point.y);
-    //     this.freeCellsTable.splice(index, 1);
-    //     return (true);
-    // }
 
     /**
-     * Déplace un point existant dans la zone vers de nouvelles coordonnées
-     * Les nouvelles coordonnées peuvent se trouver hors limites
-     * @returns Boolean true en cas de succès, false en cas d'échec
+     * This function updates the freeCellsTable by removing the Point given as an argument
+     * @param Point _point
+     * @returns Boolean true/false 
      */
-    movePoint() {
-        // implémenter la méthode
+    updateFreeCellsTable(_point) {
+        if (!(_point instanceof Point))
+            return (false);
+        let index = this.freeCellsTable.findIndex(test => test.x === _point.x && test.y === _point.y);
+        this.freeCellsTable.splice(index, 1);
+        return (true);
+    }
+
+    /**
+     * Moves an existing point in the area to new given coordinates
+     * The new coordinates may be outside the limits
+     * @returns Boolean true/false
+     */
+    movePoint(_point) {
+
     }
 
 
     /**
-     * Vérifie la position de chaque "Point" existant dans la zone
-     * Chaque Point hors des limites est automatiquement déplacé dans les limites vers la position libre la plus proche
-     * @returns int le nombre de points déplacés
+     * Check the position of each existing "Point" in the area
+     * Each Point outside the limits is automatically moved within the limits to the nearest free position
+     * @returns int : Number of points moved
      */
     needAllInside(/* déterminer les paramètres */) {
         // implémenter la méthode
     }
 }
 
-let area = new Area(300, 400);
-console.log(area.freeCellsTable);
-
-// let point2 = new Point(1, 0);
-// let point3 = new Point(0, 2);
-// let point4 = new Point(0, 1);
-// let point5 = new Point(2, 2);
-// let point6 = new Point(-1, 1);
-// area.tab.push(point1);
-// area.tab.push(point2);
-// area.tab.push(point3);
-// area.tab.push(point4);
-// area.tab.push(point5);
-// area.tab.push(point6);
-// console.log(area.tab);
-
+let area = new Area(3, 4);
+let point1 = new Point(0, 0);
+area.addPoint(point1);
+console.log(area);
